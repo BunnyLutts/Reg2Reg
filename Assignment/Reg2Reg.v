@@ -143,7 +143,7 @@ Fixpoint trans {T:Type} (r: I.reg_exp T): O.reg_exp T :=
 
 (* The proposition that the above trans maintains the equivalent semantics *)
 Definition trans_correct_p {T} (r1 : I.reg_exp T): Prop :=
-    forall (r2 : O.reg_exp T), r2 = trans r1 -> I.exp_match r1 = O.exp_match r2.
+    forall (r2 : O.reg_exp T), r2 = trans r1 -> I.exp_match r1 == O.exp_match r2.
 
 Lemma trans_EmptySet_correct: 
     forall {T} (r1 : I.reg_exp T),
@@ -180,7 +180,28 @@ Lemma trans_Optional_correct:
     forall {T : Type} (r1 : I.reg_exp T) (r0 : I.reg_exp T),
         r1 = I.Optional_r r0 -> trans_correct_p r0 -> trans_correct_p r1.
 Proof.
-Admitted.
+    intros.
+    unfold I.exp_match, O.exp_match, trans_correct_p.
+    unfold trans_correct_p in H0.
+    intros r2' ?.
+    specialize (H0 (trans r0)).
+    assert (trans r0 = trans r0).
+    1: { reflexivity.
+    }
+    apply H0 in H2.
+    rewrite H in H1.
+    rewrite H, H1.
+    apply Sets_equiv_Sets_included in H2; destruct H2.
+    apply Sets_equiv_Sets_included; simpl; split.
+    + apply Sets_union_included.
+      - apply Sets_included_union1.
+      - rewrite H2.
+        apply Sets_included_union2.
+    + apply Sets_union_included.
+      - apply Sets_included_union1.
+      - rewrite H3.
+        apply Sets_included_union2.
+Qed.
 
 Lemma trans_Char_correct:
     forall {T : Type} (r1 : I.reg_exp T) (t : T -> Prop),
@@ -253,7 +274,7 @@ Fixpoint reduce {T} (r : O.reg_exp T): (O.reg_exp T) :=
 
 (* The propostion that reduce maintains the equivalence of semantics. *)
 Definition reduce_correct_p {T} (r : O.reg_exp T): Prop :=
-    forall r1 : O.reg_exp T, r1 = (reduce r) -> O.exp_match r = O.exp_match r1.
+    forall r1 : O.reg_exp T, r1 = (reduce r) -> O.exp_match r == O.exp_match r1.
 
 (* 'EmptyStr r1' *)
 Lemma reduce_left_empty_correct:
