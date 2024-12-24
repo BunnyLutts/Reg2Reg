@@ -238,11 +238,15 @@ Qed.
 (* Remove all 'EmptyStr r1' and 'r2 EmptyStr' *)
 Fixpoint reduce {T} (r : O.reg_exp T): (O.reg_exp T) :=
     match r with
-    | O.Concat_r r' O.EmptyStr_r => reduce r'
-    | O.Concat_r O.EmptyStr_r r' => reduce r'
     | O.EmptyStr_r => O.EmptyStr_r
     | O.Char_r t => O.Char_r t
-    | O.Concat_r r1 r2 => O.Concat_r (reduce r1) (reduce r2)
+    | O.Concat_r r1 r2 => 
+        match (reduce r1), (reduce r2) with
+        | O.EmptyStr_r, O.EmptyStr_r => O.EmptyStr_r
+        | O.EmptyStr_r, _ => reduce r2
+        | _, O.EmptyStr_r => reduce r1
+        | _, _ => O.Concat_r (reduce r1) (reduce r2)
+        end
     | O.Union_r r1 r2 => O.Union_r (reduce r1) (reduce r2)
     | O.Star_r r1 => O.Star_r (reduce r1)
     end.
@@ -318,6 +322,18 @@ Fixpoint simpl_p {T} (r : O.reg_exp T) : Prop :=
     | O.Star_r r => simpl_p r
     end.
 
+Lemma reduce_Concat_simpl:
+    forall {T} (r r1 r2 : O.reg_exp T),
+        r = O.Concat_r r1 r2 -> simpl_p (reduce r1) -> simpl_p (reduce r2) -> simpl_p (reduce r).
+Proof.
+    intros.
+    rewrite H; simpl.
+    induction r1, r2; repeat tauto.
+    + simpl.
+      destruct r2_1, r2_2.
+    +  
+Admitted.
+
 (* Simplicity of reduce. *)
 Theorem reduce_simpl:
     forall {T} (r r0 : O.reg_exp T),
@@ -326,7 +342,10 @@ Proof.
 induction r.
 + intros; rewrite H; simpl; tauto.
 + intros; rewrite H; simpl; tauto.
-+ admit.
++ (* Concat *)
+  intros.
+  pose proof reduce_Concat_simpl (O.Concat_r r1 r2) r1 r2 eq_refl (IHr1 (reduce r1) eq_refl) (IHr2 (reduce r2) eq_refl).
+  rewrite H; exact H0.
 + intros.
   rewrite H; simpl.
   split.
