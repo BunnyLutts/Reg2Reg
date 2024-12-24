@@ -32,6 +32,8 @@ Arguments Concat_r {T} _ _.
 Arguments Union_r {T} _ _.
 Arguments Star_r {T} _.
 
+
+(* Concat two semantic.*)
 Definition set_prod {T} (A B : list T -> Prop) : list T -> Prop :=
   fun s => exists s1 s2, s1 ∈ A /\ s2 ∈ B /\ s = s1 ++ s2.
 
@@ -41,6 +43,9 @@ Fixpoint star_r_indexed {T} (n : nat) (s : list T -> Prop) : list T -> Prop :=
   | S n' => set_prod s (star_r_indexed n' s)
   end.
 
+(* Denote the semantics as 
+    list T -> Prop : The strings that regexp accepts.
+    Definition of the semantics of O.reg_exp *)
 Fixpoint exp_match {T} (r : reg_exp T) : list T -> Prop :=
   match r with
   | EmptyStr_r => [ nil ]
@@ -93,6 +98,7 @@ Fixpoint plus_r_indexed {T} (n : nat) (s : list T -> Prop) : list T -> Prop :=
   | S n' => O.set_prod s (plus_r_indexed n' s)
   end.
 
+(* Definition of the semantics of I.reg_exp. *)
 Fixpoint exp_match {T} (r: reg_exp T) : list T -> Prop :=
     match r with
     | EmptySet_r => [nil]
@@ -108,12 +114,14 @@ Fixpoint exp_match {T} (r: reg_exp T) : list T -> Prop :=
 
 End I.
 
+(* Translate a string into O.reg_exp *)
 Fixpoint string2reg {T:Type} (s: list T): O.reg_exp T :=
     match s with
     | nil => O.EmptyStr_r
     | cons c s' => O.Concat_r (O.Char_r (fun x => x = c)) (string2reg s')
     end.
 
+(* Translate I.reg_exp to O.reg_exp *)
 Fixpoint trans {T:Type} (r: I.reg_exp T): O.reg_exp T :=
     match r with
     | I.EmptySet_r => O.EmptyStr_r
@@ -133,6 +141,7 @@ Fixpoint trans {T:Type} (r: I.reg_exp T): O.reg_exp T :=
     | I.Star_r r => O.Star_r (trans r)
     end.
 
+(* The proposition that the above trans maintains the equivalent semantics *)
 Definition trans_correct_p {T} (r1 : I.reg_exp T): Prop :=
     forall (r2 : O.reg_exp T), r2 = trans r1 -> I.exp_match r1 = O.exp_match r2.
 
@@ -209,6 +218,7 @@ Lemma trans_Star_correct:
 Proof.
 Admitted.
 
+(* The equivalence of the semantics between transfer. *)
 Theorem trans_correct:
     forall {T} (r1 : I.reg_exp T), trans_correct_p r1.
 Proof.
@@ -225,6 +235,7 @@ Proof.
     + pose proof trans_Star_correct (I.Star_r r1) r1 eq_refl IHr1; exact H.
 Qed.
 
+(* Remove all 'EmptyStr r1' and 'r2 EmptyStr' *)
 Fixpoint reduce {T} (r : O.reg_exp T): (O.reg_exp T) :=
     match r with
     | O.Concat_r r' O.EmptyStr_r => reduce r'
@@ -236,15 +247,18 @@ Fixpoint reduce {T} (r : O.reg_exp T): (O.reg_exp T) :=
     | O.Star_r r1 => O.Star_r (reduce r1)
     end.
 
+(* The propostion that reduce maintains the equivalence of semantics. *)
 Definition reduce_correct_p {T} (r : O.reg_exp T): Prop :=
     forall r1 : O.reg_exp T, r1 = (reduce r) -> O.exp_match r = O.exp_match r1.
 
+(* 'EmptyStr r1' *)
 Lemma reduce_left_empty_correct:
     forall {T:Type} (r r1 : O.reg_exp T),
         r = O.Concat_r O.EmptyStr_r r1 -> reduce_correct_p r1 -> reduce_correct_p r.
 Proof.
 Admitted.
 
+(* 'r2 EmptyStr' *)
 Lemma reduce_right_empty_correct:
     forall {T:Type} (r r1 : O.reg_exp T),
         r = O.Concat_r r1 O.EmptyStr_r -> reduce_correct_p r1 -> reduce_correct_p r.
@@ -281,6 +295,7 @@ Lemma reduce_Star_correct:
 Proof.
 Admitted.
 
+(* The equivalence of semantics before and after reduce *)
 Theorem reduce_correct:
     forall {T} (r : O.reg_exp T),
         reduce_correct_p r.
@@ -293,6 +308,7 @@ induction r.
 + pose proof reduce_Star_correct (O.Star_r r) r eq_refl IHr; exact H.
 Qed.
 
+(* The proposition that reduce really reduced. *)
 Fixpoint simpl_p {T} (r : O.reg_exp T) : Prop :=
     match r with
     | O.EmptyStr_r => True
@@ -302,6 +318,7 @@ Fixpoint simpl_p {T} (r : O.reg_exp T) : Prop :=
     | O.Star_r r => simpl_p r
     end.
 
+(* Simplicity of reduce. *)
 Theorem reduce_simpl:
     forall {T} (r r0 : O.reg_exp T),
         r0 = (reduce r) -> simpl_p r0.
@@ -319,3 +336,20 @@ induction r.
   rewrite H; simpl.
   apply IHr; reflexivity.
 Admitted.
+
+Theorem trans_reduce_correct: 
+    forall {T} (r0 : I.reg_exp T),
+        O.exp_match (reduce (trans r0)) = I.exp_match r0.
+Proof.
+    intros.
+    pose proof reduce_correct (trans r0).
+    unfold reduce_correct_p in H.
+    specialize H with (reduce (trans r0)).
+    pose proof H eq_refl.
+    rewrite <- H0.
+    pose proof trans_correct r0.
+    unfold trans_correct_p in H1.
+    pose proof H1 (trans r0) eq_refl.
+    rewrite <- H2.
+    reflexivity.
+Qed.
