@@ -409,10 +409,10 @@ Lemma reduce_Concat_simpl:
 Proof.
     intros.
     rewrite H; simpl.
-    induction r1, r2; repeat tauto.
-    + simpl.
-      destruct r2_1, r2_2.
-Admitted.
+    remember (reduce r1) as r1'.
+    remember (reduce r2) as r2'.
+    destruct r1', r2'; repeat tauto; simpl in *; simpl; repeat split; repeat tauto; repeat discriminate.
+Qed.
 
 (* Simplicity of reduce. *)
 Theorem reduce_simpl:
@@ -434,7 +434,7 @@ induction r.
 + intros.
   rewrite H; simpl.
   apply IHr; reflexivity.
-Admitted.
+Qed.
 
 Theorem trans_reduce_correct: 
     forall {T} (r0: I.reg_exp T) (r1 : O.reg_exp T),
