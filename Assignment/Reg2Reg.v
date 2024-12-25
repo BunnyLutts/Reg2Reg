@@ -101,7 +101,7 @@ Fixpoint plus_r_indexed {T} (n : nat) (s : list T -> Prop) : list T -> Prop :=
 (* Definition of the semantics of I.reg_exp. *)
 Fixpoint exp_match {T} (r: reg_exp T) : list T -> Prop :=
     match r with
-    | EmptySet_r => [nil]
+    | EmptySet_r => ∅
     | EmptyStr_r => [nil]
     | Optional_r r => [nil] ∪ (exp_match r)
     | Char_r t => fun s => exists c, c ∈ t /\ s = (cons c nil)
@@ -121,29 +121,75 @@ Fixpoint string2reg {T:Type} (s: list T): O.reg_exp T :=
     | cons c s' => O.Concat_r (O.Char_r (fun x => x = c)) (string2reg s')
     end.
 
+Inductive trans_result (T: Type) : Type :=
+    | Empty
+    | Data (r : O.reg_exp T).
+
+Arguments Empty {T}.
+Arguments Data {T} _.
+
+Lemma trans_result_inj {T:Type} :
+    forall (r1 r2: O.reg_exp T),
+        Data r1 = Data r2 -> r1 = r2.
+Proof.
+intros.
+injection H.
+tauto.
+Qed.
+
 (* Translate I.reg_exp to O.reg_exp *)
-Fixpoint trans {T:Type} (r: I.reg_exp T): O.reg_exp T :=
+Fixpoint trans {T:Type} (r: I.reg_exp T): trans_result T :=
     match r with
-    | I.EmptySet_r => O.EmptyStr_r
+    | I.EmptySet_r => Empty
     (* '' *)
-    | I.EmptyStr_r => O.EmptyStr_r
+    | I.EmptyStr_r => Data O.EmptyStr_r
     (* ?<r> *)
-    | I.Optional_r r => O.Union_r (O.EmptyStr_r) (trans r)
-    | I.Char_r t => O.Char_r t
+    | I.Optional_r r => 
+        match (trans r) with
+        | Empty => Data (O.EmptyStr_r)
+        | Data r' => Data (O.Union_r (O.EmptyStr_r) r')
+        end
+    | I.Char_r t => Data (O.Char_r t)
     (* '<r1><r2>' *)
-    | I.Concat_r r1 r2 => O.Concat_r (trans r1) (trans r2)
+    | I.Concat_r r1 r2 => 
+        match (trans r1), (trans r2) with
+        | Empty, Empty => Empty
+        | Empty, Data r2' => Empty
+        | Data r1', Empty => Empty
+        | Data r1', Data r2' => Data (O.Concat_r r1' r2')
+        end
     (* '<r1>|<r2>' *)
-    | I.Union_r r1 r2 => O.Union_r (trans r1) (trans r2)
-    | I.String_r s => string2reg s
+    | I.Union_r r1 r2 => 
+        match (trans r1), (trans r2) with
+        | Empty, Empty => Empty
+        | Empty, Data r2' => Data r2'
+        | Data r1', Empty => Data r1'
+        | Data r1', Data r2' => Data (O.Union_r r1' r2')
+        end
+    | I.String_r s => Data (string2reg s)
     (* '<r>+' *)
-    | I.Plus_r r => O.Concat_r (trans r) (O.Star_r (trans r))
+    | I.Plus_r r => 
+        match (trans r) with
+        | Empty => Empty
+        | Data r' => Data (O.Concat_r r' (O.Star_r r'))
+        end
     (* '<r>*' *)
-    | I.Star_r r => O.Star_r (trans r)
+    | I.Star_r r => 
+        match (trans r) with 
+        | Empty => Data O.EmptyStr_r
+        | Data r' => Data (O.Star_r r')
+        end
     end.
+
+Lemma trans_empty:
+    forall {T} (r1 : I.reg_exp T),
+        trans r1 = Empty -> I.exp_match r1 == ∅.
+Proof.
+Admitted.
 
 (* The proposition that the above trans maintains the equivalent semantics *)
 Definition trans_correct_p {T} (r1 : I.reg_exp T): Prop :=
-    forall (r2 : O.reg_exp T), r2 = trans r1 -> I.exp_match r1 == O.exp_match r2.
+    forall (r2 : O.reg_exp T), Data r2 = trans r1 -> I.exp_match r1 == O.exp_match r2.
 
 Lemma trans_EmptySet_correct: 
     forall {T} (r1 : I.reg_exp T),
@@ -154,10 +200,7 @@ Proof.
     intros.
     unfold trans in H0.
     rewrite H in H0.
-    rewrite H0.
-    unfold O.exp_match, I.exp_match.
-    rewrite H.
-    reflexivity.
+    discriminate.
 Qed.
 
 
@@ -170,6 +213,7 @@ Proof.
     intros.
     unfold trans in H0.
     rewrite H in H0.
+    apply trans_result_inj in H0.
     rewrite H0.
     unfold O.exp_match, I.exp_match.
     rewrite H.
@@ -184,22 +228,38 @@ Proof.
     unfold I.exp_match, O.exp_match, trans_correct_p.
     unfold trans_correct_p in H0.
     intros r2' ?.
-    specialize (H0 (trans r0)).
-    assert (trans r0 = trans r0).
-    1: { reflexivity.
-    }
-    apply H0 in H2.
+    remember (trans r0) as res.
+    destruct res.
+    + symmetry in Heqres.
+      pose proof trans_empty r0 Heqres.
+      rewrite H.
+      simpl.
+      rewrite H2.
+      rewrite H in H1.
+      simpl in H1.
+      rewrite Heqres in H1.
+      injection H1.
+      intros.
+      rewrite H3.
+      simpl.
+      rewrite Sets_union_empty_r.
+      reflexivity.
+    + 
+    specialize (H0 r eq_refl).
     rewrite H in H1.
+    simpl in H1.
+    rewrite <- Heqres in H1.
+    apply trans_result_inj in H1.
     rewrite H, H1.
-    apply Sets_equiv_Sets_included in H2; destruct H2.
+    apply Sets_equiv_Sets_included in H0; destruct H0.
     apply Sets_equiv_Sets_included; simpl; split.
-    + apply Sets_union_included.
+    * apply Sets_union_included.
+      - apply Sets_included_union1.
+      - rewrite H0.
+        apply Sets_included_union2.
+    * apply Sets_union_included.
       - apply Sets_included_union1.
       - rewrite H2.
-        apply Sets_included_union2.
-    + apply Sets_union_included.
-      - apply Sets_included_union1.
-      - rewrite H3.
         apply Sets_included_union2.
 Qed.
 
@@ -352,7 +412,6 @@ Proof.
     induction r1, r2; repeat tauto.
     + simpl.
       destruct r2_1, r2_2.
-    +  
 Admitted.
 
 (* Simplicity of reduce. *)
@@ -378,18 +437,24 @@ induction r.
 Admitted.
 
 Theorem trans_reduce_correct: 
-    forall {T} (r0 : I.reg_exp T),
-        O.exp_match (reduce (trans r0)) = I.exp_match r0.
+    forall {T} (r0: I.reg_exp T) (r1 : O.reg_exp T),
+        Data r1 = trans r0 -> O.exp_match (reduce r1) == I.exp_match r0.
 Proof.
     intros.
-    pose proof reduce_correct (trans r0).
+    pose proof reduce_correct r1.
     unfold reduce_correct_p in H.
-    specialize H with (reduce (trans r0)).
-    pose proof H eq_refl.
-    rewrite <- H0.
+    remember (trans r0) as res; destruct res; [discriminate|].
+    injection H.
+    intros.
     pose proof trans_correct r0.
-    unfold trans_correct_p in H1.
-    pose proof H1 (trans r0) eq_refl.
-    rewrite <- H2.
-    reflexivity.
+    unfold trans_correct_p in H2.
+    specialize H2 with r.
+    apply H2 in Heqres as H3.
+    rewrite H3.
+    unfold reduce_correct_p in H0.
+    specialize H0 with (reduce r1).
+    rewrite H1.
+    pose proof H0 eq_refl.
+    rewrite H1 in H4. symmetry in H4.
+    exact H4.
 Qed.
