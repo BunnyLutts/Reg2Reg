@@ -181,6 +181,32 @@ Fixpoint trans {T:Type} (r: I.reg_exp T): trans_result T :=
         end
     end.
 
+Lemma set_prod_equiv:
+    forall {T} (A B C D : list T -> Prop),
+        A == C -> B == D -> O.set_prod A B == O.set_prod C D.
+Proof.
+intros.
+unfold O.set_prod.
+Sets_unfold.
+split.
++ intros.
+  repeat destruct H1.
+  repeat destruct H2.
+  rewrite H in H1.
+  rewrite H0 in H2.
+  exists x.
+  exists x0.
+  tauto.
++ intros.
+  repeat destruct H1.
+  repeat destruct H2.
+  rewrite <- H in H1.
+  rewrite <- H0 in H2.
+  exists x.
+  exists x0.
+  tauto.
+Qed.
+
 Lemma trans_empty:
     forall {T} (r1 : I.reg_exp T),
         trans r1 = Empty -> I.exp_match r1 == ∅.
@@ -347,16 +373,23 @@ Qed.
 
 (* 'EmptyStr r1' *)
 Lemma reduce_left_empty_correct:
-    forall {T:Type} (r r1 : O.reg_exp T),
-        r = O.Concat_r O.EmptyStr_r r1 -> reduce_correct_p r1 -> reduce_correct_p r.
+    forall {T:Type} (r r1 r2: O.reg_exp T),
+        r = O.Concat_r r1 r2 -> (reduce r1) = O.EmptyStr_r -> reduce_correct_p r1 -> reduce_correct_p r2 -> reduce_correct_p r.
 Proof.
 unfold reduce_correct_p.
 intros.
 remember (reduce r1) as r1'.
-pose proof H0 r1' eq_refl.
+remember (reduce r2) as r2'. 
+pose proof H1 r1' eq_refl.
+pose proof H2 r2' eq_refl.
 rewrite H.
-rewrite H in H1.
-rewrite H1.
+rewrite H in H3.
+rewrite H3.
+simpl.
+pose proof set_prod_equiv _ _ _ _ H4 H5.
+rewrite H6.
+rewrite <- Heqr1', <- Heqr2'.
+rewrite H0.
 simpl.
 assert (forall {T} (t : list T -> Prop), O.set_prod [nil] t == t). {
     unfold O.set_prod.
@@ -365,34 +398,37 @@ assert (forall {T} (t : list T -> Prop), O.set_prod [nil] t == t). {
     intros.
     split.
     + intros.
-      repeat destruct H3.
-      destruct H4.
-      rewrite app_nil_l in H4.
-      rewrite H4; exact H3.
+      repeat destruct H7.
+      destruct H8.
+      rewrite app_nil_l in H8.
+      rewrite H8; exact H7.
     + intros.
       exists nil, a.
-      simpl.
-      split; try tauto; try reflexivity.
+      repeat split; try tauto; try reflexivity.
 }
-specialize H3 with T (O.exp_match r1).
-rewrite H3.
-rewrite H2.
-rewrite <- Heqr1'.
-destruct r1'; try reflexivity.
+specialize H7 with T (O.exp_match r2').
+destruct r2'; try exact H7.
 Qed.
 
 (* 'r2 EmptyStr' *)
 Lemma reduce_right_empty_correct:
-    forall {T:Type} (r r1 : O.reg_exp T),
-        r = O.Concat_r r1 O.EmptyStr_r -> reduce_correct_p r1 -> reduce_correct_p r.
+    forall {T:Type} (r r1 r2 : O.reg_exp T),
+        r = O.Concat_r r1 r2 -> (reduce r2) = O.EmptyStr_r -> reduce_correct_p r1 -> reduce_correct_p r2 -> reduce_correct_p r.
 Proof.
 unfold reduce_correct_p.
 intros.
 remember (reduce r1) as r1'.
-pose proof H0 r1' eq_refl.
+remember (reduce r2) as r2'. 
+pose proof H1 r1' eq_refl.
+pose proof H2 r2' eq_refl.
 rewrite H.
-rewrite H in H1.
-rewrite H1.
+rewrite H in H3.
+rewrite H3.
+simpl.
+pose proof set_prod_equiv _ _ _ _ H4 H5.
+rewrite H6.
+rewrite <- Heqr1', <- Heqr2'.
+rewrite H0.
 simpl.
 assert (forall {T} (t : list T -> Prop), O.set_prod t [nil] == t). {
     unfold O.set_prod.
@@ -401,21 +437,18 @@ assert (forall {T} (t : list T -> Prop), O.set_prod t [nil] == t). {
     intros.
     split.
     + intros.
-      repeat destruct H3.
-      destruct H4.
-      destruct H4.
-      rewrite app_nil_r in H5.
-      rewrite H5; exact H3.
+      repeat destruct H7.
+      destruct H8.
+      destruct H8.
+      rewrite app_nil_r in H9.
+      rewrite H9; exact H7.
     + intros.
       exists a, nil.
       repeat split; try tauto; try reflexivity.
       rewrite app_nil_r; reflexivity.
 }
-specialize H3 with T (O.exp_match r1).
-rewrite H3.
-rewrite H2.
-rewrite <- Heqr1'.
-destruct r1'; try reflexivity.
+specialize H7 with T (O.exp_match r1').
+destruct r1'; try exact H7.
 Qed.
 
 Lemma reduce_EmptyStr_correct:
@@ -434,6 +467,19 @@ Lemma reduce_Concat_correct:
     forall {T:Type} (r r1 r2 : O.reg_exp T),
         r = O.Concat_r r1 r2 -> reduce_correct_p r1 -> reduce_correct_p r2 -> reduce_correct_p r.
 Proof.
+unfold reduce_correct_p.
+intros.
+remember (reduce r1) as r1'.
+remember (reduce r2) as r2'.
+pose proof H0 r1' eq_refl.
+pose proof H1 r2' eq_refl.
+rewrite H2.
+rewrite H.
+simpl.
+rewrite <- Heqr1', <- Heqr2'.
+pose proof set_prod_equiv _ _ _ _ H3 H4.
+rewrite H5.
+destruct r1', r2'.
 Admitted.
 
 Lemma reduce_Union_correct:
