@@ -336,9 +336,18 @@ Fixpoint reduce {T} (r : O.reg_exp T): (O.reg_exp T) :=
 Definition reduce_correct_p {T} (r : O.reg_exp T): Prop :=
     forall r1 : O.reg_exp T, r1 = (reduce r) -> O.exp_match r == O.exp_match r1.
 
+Lemma transivity:
+    forall {T} (A B C : list T -> Prop),
+        A == B -> B == C -> A == C.
+Proof.
+intros.
+rewrite H.
+exact H0.
+Qed.
+
 (* 'EmptyStr r1' *)
 Lemma reduce_left_empty_correct:
-    forall {T:Type} Require Import Coq.Classes.Morphisms.(r r1 : O.reg_exp T),
+    forall {T:Type} (r r1 : O.reg_exp T),
         r = O.Concat_r O.EmptyStr_r r1 -> reduce_correct_p r1 -> reduce_correct_p r.
 Proof.
 unfold reduce_correct_p.
@@ -377,7 +386,37 @@ Lemma reduce_right_empty_correct:
     forall {T:Type} (r r1 : O.reg_exp T),
         r = O.Concat_r r1 O.EmptyStr_r -> reduce_correct_p r1 -> reduce_correct_p r.
 Proof.
-Admitted.
+unfold reduce_correct_p.
+intros.
+remember (reduce r1) as r1'.
+pose proof H0 r1' eq_refl.
+rewrite H.
+rewrite H in H1.
+rewrite H1.
+simpl.
+assert (forall {T} (t : list T -> Prop), O.set_prod t [nil] == t). {
+    unfold O.set_prod.
+    intros.
+    Sets_unfold.
+    intros.
+    split.
+    + intros.
+      repeat destruct H3.
+      destruct H4.
+      destruct H4.
+      rewrite app_nil_r in H5.
+      rewrite H5; exact H3.
+    + intros.
+      exists a, nil.
+      repeat split; try tauto; try reflexivity.
+      rewrite app_nil_r; reflexivity.
+}
+specialize H3 with T (O.exp_match r1).
+rewrite H3.
+rewrite H2.
+rewrite <- Heqr1'.
+destruct r1'; try reflexivity.
+Qed.
 
 Lemma reduce_EmptyStr_correct:
     forall {T:Type} (r : O.reg_exp T),
