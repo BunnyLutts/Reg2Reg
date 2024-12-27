@@ -265,6 +265,12 @@ split.
 + tauto.
 Qed.
 
+Lemma star_r_indexed_equiv:
+    forall {T} (a b : list T -> Prop),
+        a == b -> (⋃ O.star_r_indexed) a == (⋃ O.star_r_indexed) b.
+Proof.
+Admitted.
+
 Lemma set_prod_included:
     forall {T} (A B C D : list T -> Prop),
         A ⊆ C -> B ⊆ D -> (O.set_prod A B) ⊆ (O.set_prod C D).
@@ -477,13 +483,66 @@ Lemma trans_Plus_correct:
     forall {T : Type} (r r1 : I.reg_exp T),
         r = I.Plus_r r1 -> trans_correct_p r1 -> trans_correct_p r.
 Proof.
+    intros.
+    unfold trans_correct_p.
+    intros.
+    rewrite H. simpl.
+    unfold trans_correct_p in H0.
+    rewrite H in H1. simpl in H1.
+    remember (trans r1) as res.
+    destruct res.
+    + discriminate H1.
+    + specialize (H0 r0 eq_refl).
+      apply trans_result_inj in H1.
+      rewrite H1. simpl.
+      apply Sets_equiv_Sets_included. split.
+      * apply Sets_indexed_union_included.
+        induction n.
+        - simpl. rewrite H0. Sets_unfold.
+          intros. unfold O.set_prod.
+          exists a, nil.
+          repeat split; repeat tauto.
+          exists 0. simpl. reflexivity.
+          rewrite app_nil_r. reflexivity.
+        - unfold I.plus_r_indexed.
+          pose proof (set_prod_equiv_left (I.exp_match r1) (O.exp_match r0)).
+          
+    
 Admitted.
 
 Lemma trans_Star_correct:
     forall {T : Type} (r r1 : I.reg_exp T),
         r = I.Star_r r1 -> trans_correct_p r1 -> trans_correct_p r.
 Proof.
-Admitted.
+    intros.
+    unfold trans_correct_p.
+    intros.
+    rewrite H. simpl.
+    unfold trans_correct_p in H0.
+    rewrite H in H1. simpl in H1.
+    remember (trans r1) as res.
+    destruct res.
+    + apply trans_result_inj in H1.
+      rewrite H1. simpl.
+      symmetry in Heqres.
+      apply trans_empty in Heqres.
+      pose proof (star_r_indexed_equiv (I.exp_match r1) ∅ Heqres).
+      rewrite H2.
+      apply Sets_equiv_Sets_included. split.
+      * apply Sets_indexed_union_included.
+        induction n. simpl. reflexivity.
+        unfold O.star_r_indexed.
+        rewrite set_prod_left_empty.
+        apply Sets_empty_included.
+      * unfold O.star_r_indexed.
+        sets_unfold.
+        intros. exists 0. apply H3.
+    + specialize (H0 r0 eq_refl).
+      apply trans_result_inj in H1.
+      rewrite H1. simpl.
+      apply star_r_indexed_equiv.
+      apply H0.
+Qed.
 
 (* The equivalence of the semantics between transfer. *)
 Theorem trans_correct:
