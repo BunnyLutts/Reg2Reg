@@ -181,6 +181,7 @@ Fixpoint trans {T:Type} (r: I.reg_exp T): trans_result T :=
         end
     end.
 
+(* set_prod A B == set_prod C D *)
 Lemma set_prod_equiv:
     forall {T} (A B C D : list T -> Prop),
         A == C -> B == D -> O.set_prod A B == O.set_prod C D.
@@ -207,11 +208,133 @@ split.
   tauto.
 Qed.
 
+Lemma set_equiv_ref:
+    forall {T} (A : T -> Prop),
+        A == A.
+Proof.
+intros.
+reflexivity.
+Qed.
+
+(* set_prod A B == set_prod C B*)
+Lemma set_prod_equiv_left:
+    forall {T} (A B C : list T -> Prop),
+        A == C -> O.set_prod A B == O.set_prod C B.
+Proof.
+intros.
+pose proof set_prod_equiv A B C B H (set_equiv_ref B).
+exact H0.
+Qed.
+
+(* set_prod A B == set_prod A C*)
+Lemma set_prod_equiv_right:
+    forall {T} (A B C : list T -> Prop),
+        B == C -> O.set_prod A B == O.set_prod A C.
+Proof.
+intros. 
+pose proof set_prod_equiv A B A C (set_equiv_ref A) H.
+exact H0.
+Qed.
+
+(* set_prod ∅ s == ∅ *)
+Lemma set_prod_left_empty:
+    forall {T} (s : list T -> Prop),
+        O.set_prod ∅ s == ∅.
+Proof.
+intros.
+unfold O.set_prod.
+Sets_unfold.
+split.
++ intros.
+  repeat destruct H.
++ tauto.
+Qed.
+
+(* set_prod s ∅ == ∅ *)
+Lemma set_prod_right_empty: 
+    forall {T} (s : list T -> Prop),
+        O.set_prod s ∅ == ∅.
+Proof.
+intros.
+unfold O.set_prod.
+Sets_unfold.
+split.
++ intros.
+  repeat destruct H.
+  repeat destruct H0.
++ tauto.
+Qed.
+
 Lemma trans_empty:
     forall {T} (r1 : I.reg_exp T),
         trans r1 = Empty -> I.exp_match r1 == ∅.
 Proof.
-Admitted.
+intros.
+induction r1.
++ simpl; reflexivity.
++ simpl in H; discriminate.
++ simpl in H.
+  simpl.
+  remember (trans r1) as res; destruct res.
+  discriminate.
+  discriminate.
++ simpl in H.
+  discriminate.
++ simpl in H.
+  simpl.
+  remember (trans r1_1) as res1.
+  remember (trans r1_2) as res2.
+  destruct res1, res2.
+  * pose proof IHr1_1 H.
+    pose proof IHr1_2 H.
+    simpl.
+    pose proof set_prod_equiv _ _ _ _ H0 H1.
+    rewrite H2.
+    apply set_prod_left_empty.
+  * pose proof IHr1_1 H.
+    simpl.
+    pose proof set_prod_equiv_left _ (I.exp_match r1_2) ∅ H0.
+    rewrite H1.
+    apply set_prod_left_empty.
+  * pose proof IHr1_2 H.
+    simpl.
+    pose proof set_prod_equiv_right (I.exp_match r1_1) _ ∅ H0.
+    rewrite H1.
+    apply set_prod_right_empty.
+  * discriminate.
++ simpl in H.
+  simpl.
+  remember (trans r1_1) as res1.
+  remember (trans r1_2) as res2.
+  destruct res1, res2; try discriminate.
+  pose proof IHr1_1 H.
+  pose proof IHr1_2 H.
+  rewrite H0, H1.
+  apply Sets_union_empty_l.
++ discriminate.
++ simpl in H.
+  simpl.
+  remember (trans r1) as res; destruct res.
+  * pose proof IHr1 H.
+    apply Sets_equiv_empty_fact.
+    apply Sets_indexed_union_included.
+    induction n.
+    - simpl.
+      rewrite H0.
+      reflexivity.
+    - simpl.
+      pose proof set_prod_equiv_left _ (I.plus_r_indexed n (I.exp_match r1)) ∅ H0.
+      rewrite H1.
+      pose proof (set_prod_left_empty (I.plus_r_indexed n (I.exp_match r1))).
+      rewrite H2.
+      reflexivity.
+  * discriminate.
++ simpl in H.
+  simpl.
+  remember (trans r1) as res; destruct res.
+  * discriminate.
+  * discriminate.
+Qed.
 
 (* The proposition that the above trans maintains the equivalent semantics *)
 Definition trans_correct_p {T} (r1 : I.reg_exp T): Prop :=
@@ -363,7 +486,7 @@ Definition reduce_correct_p {T} (r : O.reg_exp T): Prop :=
     forall r1 : O.reg_exp T, r1 = (reduce r) -> O.exp_match r == O.exp_match r1.
 
 (* set_prod [nil] s == s*)
-Lemma set_prod_left_empty:
+Lemma set_prod_left_nil:
     forall {T:Type} (s : list T -> Prop),
         O.set_prod [nil] s == s.
 Proof.
@@ -382,7 +505,8 @@ Proof.
       repeat split; try tauto; try reflexivity.
 Qed.
 
-Lemma set_prod_right_empty:
+(* set_prod s [nil] == s*)
+Lemma set_prod_right_nil:
     forall {T:Type} (s : list T -> Prop),
         O.set_prod s [nil] == s.
 Proof.
@@ -433,10 +557,10 @@ pose proof set_prod_equiv _ _ _ _ H3 H4.
 rewrite H5.
 destruct r1', r2';
 try (
-    apply (set_prod_left_empty _)
+    apply (set_prod_left_nil _)
 );
 try (
-    apply (set_prod_right_empty _)
+    apply (set_prod_right_nil _)
 );
 try (
     simpl;
