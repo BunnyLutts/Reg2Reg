@@ -362,93 +362,45 @@ Fixpoint reduce {T} (r : O.reg_exp T): (O.reg_exp T) :=
 Definition reduce_correct_p {T} (r : O.reg_exp T): Prop :=
     forall r1 : O.reg_exp T, r1 = (reduce r) -> O.exp_match r == O.exp_match r1.
 
-Lemma transivity:
-    forall {T} (A B C : list T -> Prop),
-        A == B -> B == C -> A == C.
+(* set_prod [nil] s == s*)
+Lemma set_prod_left_empty:
+    forall {T:Type} (s : list T -> Prop),
+        O.set_prod [nil] s == s.
 Proof.
-intros.
-rewrite H.
-exact H0.
-Qed.
-
-(* 'EmptyStr r1' *)
-Lemma reduce_left_empty_correct:
-    forall {T:Type} (r r1 r2: O.reg_exp T),
-        r = O.Concat_r r1 r2 -> (reduce r1) = O.EmptyStr_r -> reduce_correct_p r1 -> reduce_correct_p r2 -> reduce_correct_p r.
-Proof.
-unfold reduce_correct_p.
-intros.
-remember (reduce r1) as r1'.
-remember (reduce r2) as r2'. 
-pose proof H1 r1' eq_refl.
-pose proof H2 r2' eq_refl.
-rewrite H.
-rewrite H in H3.
-rewrite H3.
-simpl.
-pose proof set_prod_equiv _ _ _ _ H4 H5.
-rewrite H6.
-rewrite <- Heqr1', <- Heqr2'.
-rewrite H0.
-simpl.
-assert (forall {T} (t : list T -> Prop), O.set_prod [nil] t == t). {
     unfold O.set_prod.
     intros.
     Sets_unfold.
     intros.
     split.
     + intros.
-      repeat destruct H7.
-      destruct H8.
-      rewrite app_nil_l in H8.
-      rewrite H8; exact H7.
+      repeat destruct H.
+      destruct H0.
+      rewrite app_nil_l in H0.
+      rewrite H0; exact H.
     + intros.
       exists nil, a.
       repeat split; try tauto; try reflexivity.
-}
-specialize H7 with T (O.exp_match r2').
-destruct r2'; try exact H7.
 Qed.
 
-(* 'r2 EmptyStr' *)
-Lemma reduce_right_empty_correct:
-    forall {T:Type} (r r1 r2 : O.reg_exp T),
-        r = O.Concat_r r1 r2 -> (reduce r2) = O.EmptyStr_r -> reduce_correct_p r1 -> reduce_correct_p r2 -> reduce_correct_p r.
+Lemma set_prod_right_empty:
+    forall {T:Type} (s : list T -> Prop),
+        O.set_prod s [nil] == s.
 Proof.
-unfold reduce_correct_p.
-intros.
-remember (reduce r1) as r1'.
-remember (reduce r2) as r2'. 
-pose proof H1 r1' eq_refl.
-pose proof H2 r2' eq_refl.
-rewrite H.
-rewrite H in H3.
-rewrite H3.
-simpl.
-pose proof set_prod_equiv _ _ _ _ H4 H5.
-rewrite H6.
-rewrite <- Heqr1', <- Heqr2'.
-rewrite H0.
-simpl.
-assert (forall {T} (t : list T -> Prop), O.set_prod t [nil] == t). {
     unfold O.set_prod.
     intros.
     Sets_unfold.
     intros.
     split.
     + intros.
-      repeat destruct H7.
-      destruct H8.
-      destruct H8.
-      rewrite app_nil_r in H9.
-      rewrite H9; exact H7.
+      repeat destruct H.
+      destruct H0.
+      destruct H0.
+      rewrite app_nil_r in H1.
+      rewrite H1; exact H.
     + intros.
       exists a, nil.
       repeat split; try tauto; try reflexivity.
       rewrite app_nil_r; reflexivity.
-}
-specialize H7 with T (O.exp_match r1').
-destruct r1'; try exact H7.
 Qed.
 
 Lemma reduce_EmptyStr_correct:
@@ -479,8 +431,20 @@ simpl.
 rewrite <- Heqr1', <- Heqr2'.
 pose proof set_prod_equiv _ _ _ _ H3 H4.
 rewrite H5.
-destruct r1', r2'.
-Admitted.
+destruct r1', r2';
+try (
+    apply (set_prod_left_empty _)
+);
+try (
+    apply (set_prod_right_empty _)
+);
+try (
+    simpl;
+    apply (set_prod_equiv _ _ _ _);
+    reflexivity;
+    reflexivity
+).
+Qed.
 
 Lemma reduce_Union_correct:
     forall {T:Type} (r r1 r2 : O.reg_exp T),
