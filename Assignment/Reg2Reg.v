@@ -269,7 +269,63 @@ Lemma star_r_indexed_equiv:
     forall {T} (a b : list T -> Prop),
         a == b -> (⋃ O.star_r_indexed) a == (⋃ O.star_r_indexed) b.
 Proof.
-Admitted.
+    intros.    
+    Sets_unfold. split.
+    + intros. destruct H0.
+      exists x.
+      revert H0.
+      revert H.
+      revert a b a0. 
+      induction x.
+      - intros; tauto. 
+      - intros a' b' a0 ? ?.
+        unfold O.star_r_indexed in H0.
+        repeat destruct H0.
+        rewrite H in H0.
+        destruct H1.
+        unfold O.star_r_indexed.
+        exists x0, x1. split.
+        * apply H0.
+        * split.
+          2: {
+            apply H2.
+          }
+          specialize(IHx a' b' x1 H).
+          assert ((a', x1) ∈ O.star_r_indexed x).
+          1: {
+            unfold O.star_r_indexed.
+            apply H1.
+          }
+          pose proof IHx H3.
+          tauto.
+    + intros. destruct H0.
+      exists x.
+      revert H0.
+      revert H.
+      revert a b a0.
+      induction x.
+      - intros; tauto.
+      - intros a' b' a0 ? ?.
+        unfold O.star_r_indexed in H0.
+        repeat destruct H0.
+        rewrite <-H in H0.
+        destruct H1.
+        unfold O.star_r_indexed.
+        exists x0, x1. split.
+        * apply H0.
+        * split.
+          2: {
+            apply H2.
+          }
+          specialize(IHx a' b' x1 H).
+          assert ((b', x1) ∈ O.star_r_indexed x).
+          1: {
+            unfold O.star_r_indexed.
+            apply H1.
+          }
+          pose proof IHx H3.
+          tauto.
+Qed.
 
 Lemma set_prod_included:
     forall {T} (A B C D : list T -> Prop),
