@@ -271,6 +271,43 @@ Lemma star_r_indexed_equiv:
 Proof.
 Admitted.
 
+Lemma set_prod_included:
+    forall {T} (A B C D : list T -> Prop),
+        A ⊆ C -> B ⊆ D -> (O.set_prod A B) ⊆ (O.set_prod C D).
+Proof.
+intros.
+unfold O.set_prod.
+Sets_unfold.
+intros.
+repeat destruct H1.
+destruct H2.
+exists x, x0.
+repeat split.
+apply H; exact H1.
+apply H0; exact H2.
+exact H3.
+Qed.
+
+Lemma set_prod_included_left:
+    forall {T} (A B C : list T -> Prop),
+        A ⊆ C -> (O.set_prod A B) ⊆ (O.set_prod C B).
+Proof.
+intros.
+apply set_prod_included.
+exact H.
+reflexivity.
+Qed.
+
+Lemma set_prod_included_right:
+    forall {T} (A B C : list T -> Prop),
+        B ⊆ C -> (O.set_prod A B) ⊆ (O.set_prod A C).
+Proof.
+intros.
+apply set_prod_included.
+reflexivity.
+exact H.
+Qed.
+
 Lemma trans_empty:
     forall {T} (r1 : I.reg_exp T),
         trans r1 = Empty -> I.exp_match r1 == ∅.
