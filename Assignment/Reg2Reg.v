@@ -675,8 +675,9 @@ remember (trans r1) as res; destruct res.
   pose proof Plus_set_prod (I.exp_match r1).
   rewrite H4.
   apply set_prod_equiv; [exact H3| ].
-  admit.
-Admitted.
+  apply star_r_indexed_equiv.
+  exact H3.
+Qed.
 
 Lemma trans_Star_correct:
     forall {T : Type} (r r1 : I.reg_exp T),
