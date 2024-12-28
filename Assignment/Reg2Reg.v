@@ -265,6 +265,68 @@ split.
 + tauto.
 Qed.
 
+Lemma star_r_indexed_equiv:
+    forall {T} (a b : list T -> Prop),
+        a == b -> (⋃ O.star_r_indexed) a == (⋃ O.star_r_indexed) b.
+Proof.
+    intros.    
+    Sets_unfold. split.
+    + intros. destruct H0.
+      exists x.
+      revert H0.
+      revert H.
+      revert a b a0. 
+      induction x.
+      - intros; tauto. 
+      - intros a' b' a0 ? ?.
+        unfold O.star_r_indexed in H0.
+        repeat destruct H0.
+        rewrite H in H0.
+        destruct H1.
+        unfold O.star_r_indexed.
+        exists x0, x1. split.
+        * apply H0.
+        * split.
+          2: {
+            apply H2.
+          }
+          specialize(IHx a' b' x1 H).
+          assert ((a', x1) ∈ O.star_r_indexed x).
+          1: {
+            unfold O.star_r_indexed.
+            apply H1.
+          }
+          pose proof IHx H3.
+          tauto.
+    + intros. destruct H0.
+      exists x.
+      revert H0.
+      revert H.
+      revert a b a0.
+      induction x.
+      - intros; tauto.
+      - intros a' b' a0 ? ?.
+        unfold O.star_r_indexed in H0.
+        repeat destruct H0.
+        rewrite <-H in H0.
+        destruct H1.
+        unfold O.star_r_indexed.
+        exists x0, x1. split.
+        * apply H0.
+        * split.
+          2: {
+            apply H2.
+          }
+          specialize(IHx a' b' x1 H).
+          assert ((b', x1) ∈ O.star_r_indexed x).
+          1: {
+            unfold O.star_r_indexed.
+            apply H1.
+          }
+          pose proof IHx H3.
+          tauto.
+Qed.
+
 Lemma set_prod_included:
     forall {T} (A B C D : list T -> Prop),
         A ⊆ C -> B ⊆ D -> (O.set_prod A B) ⊆ (O.set_prod C D).
@@ -620,7 +682,35 @@ Lemma trans_Star_correct:
     forall {T : Type} (r r1 : I.reg_exp T),
         r = I.Star_r r1 -> trans_correct_p r1 -> trans_correct_p r.
 Proof.
-Admitted.
+    intros.
+    unfold trans_correct_p.
+    intros.
+    rewrite H. simpl.
+    unfold trans_correct_p in H0.
+    rewrite H in H1. simpl in H1.
+    remember (trans r1) as res.
+    destruct res.
+    + apply trans_result_inj in H1.
+      rewrite H1. simpl.
+      symmetry in Heqres.
+      apply trans_empty in Heqres.
+      pose proof (star_r_indexed_equiv (I.exp_match r1) ∅ Heqres).
+      rewrite H2.
+      apply Sets_equiv_Sets_included. split.
+      * apply Sets_indexed_union_included.
+        induction n. simpl. reflexivity.
+        unfold O.star_r_indexed.
+        rewrite set_prod_left_empty.
+        apply Sets_empty_included.
+      * unfold O.star_r_indexed.
+        sets_unfold.
+        intros. exists 0. apply H3.
+    + specialize (H0 r0 eq_refl).
+      apply trans_result_inj in H1.
+      rewrite H1. simpl.
+      apply star_r_indexed_equiv.
+      apply H0.
+Qed.
 
 (* The equivalence of the semantics between transfer. *)
 Theorem trans_correct:
@@ -663,13 +753,23 @@ Lemma reduce_EmptyStr_correct:
     forall {T:Type} (r : O.reg_exp T),
         r = O.EmptyStr_r -> reduce_correct_p r.
 Proof.
-Admitted.
+    unfold reduce_correct_p.
+    intros.
+    unfold reduce in H0. rewrite H in H0.
+    rewrite H. rewrite H0.
+    reflexivity.
+Qed.
 
 Lemma reduce_Char_correct:
     forall {T:Type} (r : O.reg_exp T) (t : T -> Prop),
         r = O.Char_r t -> reduce_correct_p r.
 Proof.
-Admitted.
+    unfold reduce_correct_p.
+    intros.
+    unfold reduce in H0. rewrite H in H0.
+    rewrite H. rewrite H0.
+    reflexivity. 
+Qed.
 
 Lemma reduce_Concat_correct:
     forall {T:Type} (r r1 r2 : O.reg_exp T),
@@ -706,13 +806,39 @@ Lemma reduce_Union_correct:
     forall {T:Type} (r r1 r2 : O.reg_exp T),
         r = O.Union_r r1 r2 -> reduce_correct_p r1 -> reduce_correct_p r2 -> reduce_correct_p r.
 Proof.
-Admitted.
+    unfold reduce_correct_p.
+    intros.
+    remember (reduce r1) as r1'.
+    remember (reduce r2) as r2'.
+    pose proof H0 r1' eq_refl.
+    pose proof H1 r2' eq_refl.
+    rewrite H2.
+    rewrite H.
+    simpl.
+    symmetry in Heqr2'. symmetry in Heqr1'.
+    specialize (H1 (reduce r2) Heqr2').
+    specialize (H0 (reduce r1) Heqr1').
+    rewrite H0, H1.
+    reflexivity.
+Qed.
 
 Lemma reduce_Star_correct:
     forall {T:Type} (r r1 : O.reg_exp T),
         r = O.Star_r r1 -> reduce_correct_p r1 -> reduce_correct_p r.
 Proof.
-Admitted.
+    unfold reduce_correct_p.
+    intros.
+    remember (reduce r1) as r1'.
+    pose proof H0 r1' eq_refl.
+    rewrite H.
+    simpl.
+    rewrite H in H1.
+    rewrite H1. simpl.
+    rewrite <- Heqr1'.
+    apply star_r_indexed_equiv.
+    apply H2.
+Qed.
+
 
 (* The equivalence of semantics before and after reduce *)
 Theorem reduce_correct:
