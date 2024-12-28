@@ -364,6 +364,48 @@ reflexivity.
 exact H.
 Qed.
 
+(* set_prod [nil] s == s*)
+Lemma set_prod_left_nil:
+    forall {T:Type} (s : list T -> Prop),
+        O.set_prod [nil] s == s.
+Proof.
+    unfold O.set_prod.
+    intros.
+    Sets_unfold.
+    intros.
+    split.
+    + intros.
+      repeat destruct H.
+      destruct H0.
+      rewrite app_nil_l in H0.
+      rewrite H0; exact H.
+    + intros.
+      exists nil, a.
+      repeat split; try tauto; try reflexivity.
+Qed.
+
+(* set_prod s [nil] == s*)
+Lemma set_prod_right_nil:
+    forall {T:Type} (s : list T -> Prop),
+        O.set_prod s [nil] == s.
+Proof.
+    unfold O.set_prod.
+    intros.
+    Sets_unfold.
+    intros.
+    split.
+    + intros.
+      repeat destruct H.
+      destruct H0.
+      destruct H0.
+      rewrite app_nil_r in H1.
+      rewrite H1; exact H.
+    + intros.
+      exists a, nil.
+      repeat split; try tauto; try reflexivity.
+      rewrite app_nil_r; reflexivity.
+Qed.
+
 Lemma trans_empty:
     forall {T} (r1 : I.reg_exp T),
         trans r1 = Empty -> I.exp_match r1 == ∅.
@@ -535,54 +577,107 @@ Lemma trans_String_correct:
 Proof.
 Admitted.
 
+Lemma Star_indexed_included:
+    forall {T} (n : nat) (s : list T -> Prop),
+        (O.star_r_indexed n s) ⊆ (⋃ O.star_r_indexed) s.
+Proof.
+intros.
+Sets_unfold.
+pose proof (Sets_included_indexed_union n (@O.star_r_indexed T)).
+Sets_unfold in H.
+intros.
+pose proof H s a H0.
+destruct H1.
+exists x.
+exact H1.
+Qed.
+
+Lemma Plus_set_prod_indexed:
+    forall {T} (n:nat) (s : list T -> Prop),
+        I.plus_r_indexed n s == O.star_r_indexed (S n) s.
+Proof.
+intros.
+induction n.
++ simpl.
+  unfold O.set_prod.
+  Sets_unfold.
+  split.
+  *
+  intros.
+  exists a, nil.
+  repeat split; try tauto; try (rewrite app_nil_r; reflexivity).
+  *
+  intros.
+  repeat destruct H.
+  destruct H0.
+  assert (x0 = nil). {
+    rewrite H0.
+    reflexivity.
+  }
+  rewrite H1.
+  rewrite H2.
+  rewrite app_nil_r.
+  exact H.
++ simpl.
+  apply set_prod_equiv; [reflexivity| exact IHn].
+Qed.
+
+Lemma Plus_set_prod:
+    forall {T} (s : list T -> Prop),
+        (⋃ I.plus_r_indexed) s == O.set_prod s ((⋃ O.star_r_indexed) s).
+Proof.
+intros.
+Sets_unfold.
+pose proof @Plus_set_prod_indexed T.
+Sets_unfold in H.
+simpl in H.
+split.
++ intros.
+  destruct H0.
+  pose proof H x s a.
+  apply H1 in H0.
+  unfold O.set_prod.
+  unfold O.set_prod in H0.
+  repeat destruct H0.
+  destruct H2.
+  exists x0, x1.
+  repeat split; try tauto.
+  exists x.
+  exact H2.
++ intros.
+  unfold O.set_prod in H, H0.
+  repeat destruct H0.
+  repeat destruct H1.
+  pose proof H x1 s a.
+  exists x1.
+  apply H3.
+  exists x, x0.
+  tauto.
+Qed.
+
 Lemma trans_Plus_correct:
     forall {T : Type} (r r1 : I.reg_exp T),
         r = I.Plus_r r1 -> trans_correct_p r1 -> trans_correct_p r.
 Proof.
-    intros.
-    unfold trans_correct_p.
-    intros.
-    rewrite H. simpl.
-    unfold trans_correct_p in H0.
-    rewrite H in H1. simpl in H1.
-    remember (trans r1) as res.
-    destruct res.
-    + discriminate H1.
-    + specialize (H0 r0 eq_refl).
-      apply trans_result_inj in H1.
-      rewrite H1. simpl.
-      apply Sets_equiv_Sets_included. split.
-      * apply Sets_indexed_union_included.
-        induction n.
-        - simpl. rewrite H0. Sets_unfold.
-          intros. unfold O.set_prod.
-          exists a, nil.
-          repeat split; repeat tauto.
-          exists 0. simpl. reflexivity.
-          rewrite app_nil_r. reflexivity.
-        - unfold I.plus_r_indexed.
-          rewrite (set_prod_included (I.exp_match r1) _ (O.exp_match r0) ((⋃ O.star_r_indexed) (O.exp_match r0))).
-          1: {
-             reflexivity.
-           } 
-           rewrite H0. reflexivity.
-           unfold I.plus_r_indexed in IHn.
-           assert (O.set_prod (O.exp_match r0)
-          ((⋃ O.star_r_indexed) (O.exp_match r0)) ⊆ (⋃ O.star_r_indexed) (O.exp_match r0)).
-          1: {
-            Sets_unfold. intros.
-            repeat destruct H2. repeat destruct H3.
-            exists (S x1). simpl.
-            unfold O.set_prod. exists x, x0. split.
-            apply H2. split.
-            apply H3. apply H4.
-          }
-          rewrite H2 in IHn.
-          apply IHn.
-      * (* TODO *)
-        (* We need to show the repationship between star_r_index and plus_r_index*)
-
-Admitted.
+unfold trans_correct_p.
+intros.
+rewrite H in H1.
+rewrite H.
+simpl in H1.
+simpl.
+remember (trans r1) as res; destruct res.
++ discriminate.
++ injection H1.
+  intros.
+  rewrite H2.
+  simpl.
+  pose proof H0 r0 eq_refl.
+  pose proof Plus_set_prod (I.exp_match r1).
+  rewrite H4.
+  apply set_prod_equiv; [exact H3| ].
+  apply star_r_indexed_equiv.
+  exact H3.
+Qed.
 
 Lemma trans_Star_correct:
     forall {T : Type} (r r1 : I.reg_exp T),
@@ -654,48 +749,6 @@ Fixpoint reduce {T} (r : O.reg_exp T): (O.reg_exp T) :=
 (* The propostion that reduce maintains the equivalence of semantics. *)
 Definition reduce_correct_p {T} (r : O.reg_exp T): Prop :=
     forall r1 : O.reg_exp T, r1 = (reduce r) -> O.exp_match r == O.exp_match r1.
-
-(* set_prod [nil] s == s*)
-Lemma set_prod_left_nil:
-    forall {T:Type} (s : list T -> Prop),
-        O.set_prod [nil] s == s.
-Proof.
-    unfold O.set_prod.
-    intros.
-    Sets_unfold.
-    intros.
-    split.
-    + intros.
-      repeat destruct H.
-      destruct H0.
-      rewrite app_nil_l in H0.
-      rewrite H0; exact H.
-    + intros.
-      exists nil, a.
-      repeat split; try tauto; try reflexivity.
-Qed.
-
-(* set_prod s [nil] == s*)
-Lemma set_prod_right_nil:
-    forall {T:Type} (s : list T -> Prop),
-        O.set_prod s [nil] == s.
-Proof.
-    unfold O.set_prod.
-    intros.
-    Sets_unfold.
-    intros.
-    split.
-    + intros.
-      repeat destruct H.
-      destruct H0.
-      destruct H0.
-      rewrite app_nil_r in H1.
-      rewrite H1; exact H.
-    + intros.
-      exists a, nil.
-      repeat split; try tauto; try reflexivity.
-      rewrite app_nil_r; reflexivity.
-Qed.
 
 Lemma reduce_EmptyStr_correct:
     forall {T:Type} (r : O.reg_exp T),
