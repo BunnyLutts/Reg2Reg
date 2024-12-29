@@ -1,0 +1,853 @@
+DIGEST a291178fa0439c8b979cd49765da968b
+FPL.Monad2
+R15:33 SetsClass.SetsClass <> <> lib
+R51:67 Coq.ZArith.ZArith <> <> lib
+R85:103 Coq.micromega.Psatz <> <> lib
+R121:141 Coq.Classes.Morphisms <> <> lib
+R159:172 Coq.Lists.List <> <> lib
+R190:212 Coq.Sorting.Permutation <> <> lib
+R230:242 PL.FixedPoint <> <> lib
+R260:267 PL.Monad <> <> lib
+R277:288 SetsClass.SetsClass_AxiomFree SetsNotation <> mod
+R297:305 PL.FixedPoint KleeneFix <> mod
+R307:314 PL.FixedPoint Sets_CPO <> mod
+R323:327 PL.Monad Monad <> mod
+R336:348 PL.Monad MonadNotation <> mod
+mod 426:442 <> SetMonadExamples4
+R452:464 PL.Monad SetMonadHoare <> mod
+R473:489 PL.Monad SetMonadOperator0 <> mod
+R498:514 PL.Monad SetMonadOperator1 <> mod
+R523:535 Coq.Lists.List ListNotations <> mod
+def 615:624 SetMonadExamples4 body_merge
+R653:658 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R644:646 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R635:637 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R629:632 Coq.Init.Datatypes <> list ind
+R634:634 Coq.Numbers.BinNums <> Z ind
+R638:641 Coq.Init.Datatypes <> list ind
+R643:643 Coq.Numbers.BinNums <> Z ind
+R647:650 Coq.Init.Datatypes <> list ind
+R652:652 Coq.Numbers.BinNums <> Z ind
+R659:668 PL.Monad SetMonad M def
+R671:685 PL.Monad SetMonadOperator1 ContinueOrBreak ind
+R703:705 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R694:696 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R688:691 Coq.Init.Datatypes <> list ind
+R693:693 Coq.Numbers.BinNums <> Z ind
+R697:700 Coq.Init.Datatypes <> list ind
+R702:702 Coq.Numbers.BinNums <> Z ind
+R706:709 Coq.Init.Datatypes <> list ind
+R711:711 Coq.Numbers.BinNums <> Z ind
+R715:718 Coq.Init.Datatypes <> list ind
+R720:720 Coq.Numbers.BinNums <> Z ind
+R734:734 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R737:738 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R741:742 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R745:745 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+binder 743:744 <> l3:1
+binder 739:740 <> l2:2
+binder 735:736 <> l1:3
+binder 734:745 <> pat:4
+R764:765 PL.Monad2 <> l2:2 var
+R760:761 PL.Monad2 <> l1:3 var
+R779:781 Coq.Init.Datatypes <> nil constr
+R789:793 PL.Monad SetMonadOperator1 break def
+R798:801 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R796:797 PL.Monad2 <> l3:1 var
+R802:803 PL.Monad2 <> l2:2 var
+R815:817 Coq.Init.Datatypes <> nil constr
+R822:826 PL.Monad SetMonadOperator1 break def
+R831:834 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R829:830 PL.Monad2 <> l3:1 var
+R835:836 PL.Monad2 <> l1:3 var
+R846:849 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R856:859 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R875:880 PL.Monad SetMonadOperator0 choice def
+R969:971 PL.Monad MonadNotation ::monad_scope:x_';;'_x not
+R956:959 PL.Monad SetMonadOperator0 test def
+R963:966 Coq.ZArith.BinInt <> ::Z_scope:x_'<='_x not
+R972:979 PL.Monad SetMonadOperator1 continue def
+R981:981 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R984:985 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R989:990 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1005:1005 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R982:983 PL.Monad2 <> l1:3 var
+R993:996 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R991:992 PL.Monad2 <> l3:1 var
+R998:1001 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R1002:1004 Coq.Init.Datatypes <> nil constr
+R906:908 PL.Monad MonadNotation ::monad_scope:x_';;'_x not
+R893:896 PL.Monad SetMonadOperator0 test def
+R900:903 Coq.ZArith.BinInt <> ::Z_scope:x_'<='_x not
+R909:916 PL.Monad SetMonadOperator1 continue def
+R918:918 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R922:923 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R926:927 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R942:942 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R924:925 PL.Monad2 <> l2:2 var
+R930:933 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R928:929 PL.Monad2 <> l3:1 var
+R935:938 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R939:941 Coq.Init.Datatypes <> nil constr
+def 1027:1031 SetMonadExamples4 merge
+binder 1033:1033 <> l:7
+binder 1035:1036 <> l0:8
+R1043:1054 PL.Monad SetMonadOperator1 repeat_break def
+R1067:1067 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1069:1070 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1073:1074 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1078:1078 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1068:1068 PL.Monad2 <> l:7 var
+R1071:1072 PL.Monad2 <> l0:8 var
+R1075:1077 Coq.Init.Datatypes <> nil constr
+R1056:1065 PL.Monad2 SetMonadExamples4 body_merge def
+def 1091:1098 SetMonadExamples4 incr_aux
+R1104:1107 Coq.Init.Datatypes <> list ind
+R1109:1109 Coq.Numbers.BinNums <> Z ind
+binder 1101:1101 <> l:9
+R1116:1116 Coq.Numbers.BinNums <> Z ind
+binder 1113:1113 <> x:10
+R1136:1136 PL.Monad2 <> l:9 var
+R1147:1149 Coq.Init.Datatypes <> nil constr
+R1154:1157 Coq.Init.Logic <> True ind
+R1164:1167 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R1180:1183 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R1175:1178 Coq.ZArith.BinInt <> ::Z_scope:x_'<='_x not
+R1174:1174 PL.Monad2 <> x:10 var
+R1184:1191 PL.Monad2 <> incr_aux:11 def
+def 1217:1220 SetMonadExamples4 incr
+R1226:1229 Coq.Init.Datatypes <> list ind
+R1231:1231 Coq.Numbers.BinNums <> Z ind
+binder 1223:1223 <> l:13
+R1251:1251 PL.Monad2 <> l:13 var
+R1262:1264 Coq.Init.Datatypes <> nil constr
+R1269:1272 Coq.Init.Logic <> True ind
+R1279:1282 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R1289:1296 PL.Monad2 SetMonadExamples4 incr_aux def
+prf 1319:1328 SetMonadExamples4 merge_perm
+binder 1340:1341 <> l1:15
+binder 1343:1344 <> l2:16
+R1351:1355 PL.Monad SetMonadHoare Hoare def
+R1372:1382 Coq.Sorting.Permutation <> Permutation ind
+R1387:1390 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R1385:1386 PL.Monad2 <> l1:15 var
+R1391:1392 PL.Monad2 <> l2:16 var
+R1358:1362 PL.Monad2 SetMonadExamples4 merge def
+R1364:1365 PL.Monad2 <> l1:15 var
+R1367:1368 PL.Monad2 <> l2:16 var
+R1423:1427 PL.Monad2 SetMonadExamples4 merge def
+R1439:1456 PL.Monad SetMonadHoare Hoare_repeat_break thm
+R1477:1477 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1481:1482 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1486:1487 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1491:1491 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+binder 1488:1490 <> l3':17
+binder 1483:1485 <> l2':18
+binder 1478:1480 <> l1':19
+binder 1477:1491 <> pat:20
+R1510:1520 Coq.Sorting.Permutation <> Permutation ind
+R1537:1540 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R1534:1536 PL.Monad2 <> l1':19 var
+R1544:1547 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R1541:1543 PL.Monad2 <> l2':18 var
+R1548:1550 PL.Monad2 <> l3':17 var
+R1525:1528 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R1439:1456 PL.Monad SetMonadHoare Hoare_repeat_break thm
+R1477:1477 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1481:1482 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1486:1487 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1491:1491 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+binder 1488:1490 <> l3':21
+binder 1483:1485 <> l2':22
+binder 1478:1480 <> l1':23
+binder 1477:1491 <> pat:24
+R1510:1520 Coq.Sorting.Permutation <> Permutation ind
+R1537:1540 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R1534:1536 PL.Monad2 <> l1':23 var
+R1544:1547 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R1541:1543 PL.Monad2 <> l2':22 var
+R1548:1550 PL.Monad2 <> l3':21 var
+R1525:1528 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R1575:1583 Coq.Lists.List <> app_nil_r thm
+R1575:1583 Coq.Lists.List <> app_nil_r thm
+R1575:1583 Coq.Lists.List <> app_nil_r thm
+R1644:1653 PL.Monad2 SetMonadExamples4 body_merge def
+R1727:1735 PL.Monad SetMonadHoare Hoare_ret thm
+R1727:1735 PL.Monad SetMonadHoare Hoare_ret thm
+R1770:1789 Coq.Sorting.Permutation <> Permutation_app_comm thm
+R1770:1789 Coq.Sorting.Permutation <> Permutation_app_comm thm
+R1802:1810 PL.Monad SetMonadHoare Hoare_ret thm
+R1802:1810 PL.Monad SetMonadHoare Hoare_ret thm
+R1840:1859 Coq.Sorting.Permutation <> Permutation_app_comm thm
+R1840:1859 Coq.Sorting.Permutation <> Permutation_app_comm thm
+R1840:1859 Coq.Sorting.Permutation <> Permutation_app_comm thm
+R1889:1900 PL.Monad SetMonadHoare Hoare_choice thm
+R1909:1923 PL.Monad SetMonadHoare Hoare_test_bind thm
+R1889:1900 PL.Monad SetMonadHoare Hoare_choice thm
+R1909:1923 PL.Monad SetMonadHoare Hoare_test_bind thm
+R1909:1923 PL.Monad SetMonadHoare Hoare_test_bind thm
+R1946:1954 PL.Monad SetMonadHoare Hoare_ret thm
+R1946:1954 PL.Monad SetMonadHoare Hoare_ret thm
+R1990:1998 Coq.Lists.List <> app_assoc thm
+R1990:1998 Coq.Lists.List <> app_assoc thm
+R1990:1998 Coq.Lists.List <> app_assoc thm
+R1990:1998 Coq.Lists.List <> app_assoc thm
+R1990:1998 Coq.Lists.List <> app_assoc thm
+R1990:1998 Coq.Lists.List <> app_assoc thm
+R2016:2035 Coq.Sorting.Permutation <> Permutation_app_comm thm
+R2039:2039 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R2041:2041 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R2016:2035 Coq.Sorting.Permutation <> Permutation_app_comm thm
+R2039:2039 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R2041:2041 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R2016:2035 Coq.Sorting.Permutation <> Permutation_app_comm thm
+R2039:2039 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R2041:2041 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R2076:2084 PL.Monad SetMonadHoare Hoare_ret thm
+R2076:2084 PL.Monad SetMonadHoare Hoare_ret thm
+R2116:2130 Coq.Sorting.Permutation <> Permutation_app thm
+R2116:2130 Coq.Sorting.Permutation <> Permutation_app thm
+R2166:2174 Coq.Lists.List <> app_assoc thm
+R2166:2174 Coq.Lists.List <> app_assoc thm
+R2166:2174 Coq.Lists.List <> app_assoc thm
+R2166:2174 Coq.Lists.List <> app_assoc thm
+R2192:2211 Coq.Sorting.Permutation <> Permutation_app_comm thm
+R2215:2215 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R2217:2217 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R2192:2211 Coq.Sorting.Permutation <> Permutation_app_comm thm
+R2215:2215 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R2217:2217 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R2192:2211 Coq.Sorting.Permutation <> Permutation_app_comm thm
+R2215:2215 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R2217:2217 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+prf 2252:2264 SetMonadExamples4 incr_app_cons
+binder 2274:2275 <> l1:25
+binder 2277:2277 <> x:26
+binder 2279:2280 <> l2:27
+R2301:2306 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2285:2288 PL.Monad2 SetMonadExamples4 incr def
+R2293:2296 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R2291:2292 PL.Monad2 <> l1:25 var
+R2297:2297 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R2299:2299 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R2298:2298 PL.Monad2 <> x:26 var
+R2321:2326 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2307:2310 PL.Monad2 SetMonadExamples4 incr def
+R2314:2317 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2313:2313 PL.Monad2 <> x:26 var
+R2318:2319 PL.Monad2 <> l2:27 var
+R2327:2330 PL.Monad2 SetMonadExamples4 incr def
+R2335:2338 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R2333:2334 PL.Monad2 <> l1:25 var
+R2340:2343 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2339:2339 PL.Monad2 <> x:26 var
+R2344:2345 PL.Monad2 <> l2:27 var
+prf 2548:2565 SetMonadExamples4 incr_app_cons_inv1
+binder 2575:2576 <> l1:28
+binder 2578:2578 <> x:29
+binder 2580:2581 <> l2:30
+R2606:2611 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2586:2589 PL.Monad2 SetMonadExamples4 incr def
+R2594:2597 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R2592:2593 PL.Monad2 <> l1:28 var
+R2599:2602 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2598:2598 PL.Monad2 <> x:29 var
+R2603:2604 PL.Monad2 <> l2:30 var
+R2612:2615 PL.Monad2 SetMonadExamples4 incr def
+R2620:2623 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R2618:2619 PL.Monad2 <> l1:28 var
+R2624:2624 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R2626:2626 Coq.Lists.List ListNotations ::list_scope:'['_x_']' not
+R2625:2625 PL.Monad2 <> x:29 var
+prf 2814:2831 SetMonadExamples4 incr_app_cons_inv2
+binder 2841:2842 <> l1:31
+binder 2844:2844 <> x:32
+binder 2846:2847 <> l2:33
+R2872:2877 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R2852:2855 PL.Monad2 SetMonadExamples4 incr def
+R2860:2863 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R2858:2859 PL.Monad2 <> l1:31 var
+R2865:2868 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2864:2864 PL.Monad2 <> x:32 var
+R2869:2870 PL.Monad2 <> l2:33 var
+R2878:2881 PL.Monad2 SetMonadExamples4 incr def
+R2885:2888 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R2884:2884 PL.Monad2 <> x:32 var
+R2889:2890 PL.Monad2 <> l2:33 var
+prf 3025:3034 SetMonadExamples4 merge_incr
+binder 3046:3047 <> l1:34
+binder 3049:3050 <> l2:35
+R3064:3071 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3057:3060 PL.Monad2 SetMonadExamples4 incr def
+R3062:3063 PL.Monad2 <> l1:34 var
+R3079:3086 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R3072:3075 PL.Monad2 SetMonadExamples4 incr def
+R3077:3078 PL.Monad2 <> l2:35 var
+R3087:3091 PL.Monad SetMonadHoare Hoare def
+R3107:3110 PL.Monad2 SetMonadExamples4 incr def
+R3094:3098 PL.Monad2 SetMonadExamples4 merge def
+R3100:3101 PL.Monad2 <> l1:34 var
+R3103:3104 PL.Monad2 <> l2:35 var
+R3139:3143 PL.Monad2 SetMonadExamples4 merge def
+R3155:3172 PL.Monad SetMonadHoare Hoare_repeat_break thm
+R3193:3193 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3197:3198 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3202:3203 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3207:3207 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+binder 3204:3206 <> l3':36
+binder 3199:3201 <> l2':37
+binder 3194:3196 <> l1':38
+binder 3193:3207 <> pat:39
+R3244:3261 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R3227:3230 PL.Monad2 SetMonadExamples4 incr def
+R3236:3239 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R3233:3235 PL.Monad2 <> l3':36 var
+R3240:3242 PL.Monad2 <> l1':38 var
+R3262:3265 PL.Monad2 SetMonadExamples4 incr def
+R3271:3274 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R3268:3270 PL.Monad2 <> l3':36 var
+R3275:3277 PL.Monad2 <> l2':37 var
+R3155:3172 PL.Monad SetMonadHoare Hoare_repeat_break thm
+R3193:3193 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3197:3198 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3202:3203 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3207:3207 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+binder 3204:3206 <> l3':40
+binder 3199:3201 <> l2':41
+binder 3194:3196 <> l1':42
+binder 3193:3207 <> pat:43
+R3244:3261 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R3227:3230 PL.Monad2 SetMonadExamples4 incr def
+R3236:3239 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R3233:3235 PL.Monad2 <> l3':40 var
+R3240:3242 PL.Monad2 <> l1':42 var
+R3262:3265 PL.Monad2 SetMonadExamples4 incr def
+R3271:3274 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R3268:3270 PL.Monad2 <> l3':40 var
+R3275:3277 PL.Monad2 <> l2':41 var
+R3421:3429 PL.Monad SetMonadHoare Hoare_ret thm
+R3421:3429 PL.Monad SetMonadHoare Hoare_ret thm
+R3449:3457 PL.Monad SetMonadHoare Hoare_ret thm
+R3449:3457 PL.Monad SetMonadHoare Hoare_ret thm
+R3477:3488 PL.Monad SetMonadHoare Hoare_choice thm
+R3497:3511 PL.Monad SetMonadHoare Hoare_test_bind thm
+R3477:3488 PL.Monad SetMonadHoare Hoare_choice thm
+R3497:3511 PL.Monad SetMonadHoare Hoare_test_bind thm
+R3497:3511 PL.Monad SetMonadHoare Hoare_test_bind thm
+R3534:3542 PL.Monad SetMonadHoare Hoare_ret thm
+R3534:3542 PL.Monad SetMonadHoare Hoare_ret thm
+R3577:3585 Coq.Lists.List <> app_assoc thm
+R3577:3585 Coq.Lists.List <> app_assoc thm
+R3577:3585 Coq.Lists.List <> app_assoc thm
+R3624:3632 Coq.Lists.List <> app_assoc thm
+R3624:3632 Coq.Lists.List <> app_assoc thm
+R3624:3632 Coq.Lists.List <> app_assoc thm
+R3664:3681 PL.Monad2 SetMonadExamples4 incr_app_cons_inv1 thm
+R3664:3681 PL.Monad2 SetMonadExamples4 incr_app_cons_inv1 thm
+R3703:3720 PL.Monad2 SetMonadExamples4 incr_app_cons_inv2 thm
+R3703:3720 PL.Monad2 SetMonadExamples4 incr_app_cons_inv2 thm
+R3743:3755 PL.Monad2 SetMonadExamples4 incr_app_cons thm
+R3743:3755 PL.Monad2 SetMonadExamples4 incr_app_cons thm
+R3789:3797 PL.Monad SetMonadHoare Hoare_ret thm
+R3789:3797 PL.Monad SetMonadHoare Hoare_ret thm
+R3832:3840 Coq.Lists.List <> app_assoc thm
+R3832:3840 Coq.Lists.List <> app_assoc thm
+R3832:3840 Coq.Lists.List <> app_assoc thm
+R3872:3889 PL.Monad2 SetMonadExamples4 incr_app_cons_inv1 thm
+R3872:3889 PL.Monad2 SetMonadExamples4 incr_app_cons_inv1 thm
+R3912:3929 PL.Monad2 SetMonadExamples4 incr_app_cons_inv2 thm
+R3912:3929 PL.Monad2 SetMonadExamples4 incr_app_cons_inv2 thm
+R3951:3963 PL.Monad2 SetMonadExamples4 incr_app_cons thm
+R3951:3963 PL.Monad2 SetMonadExamples4 incr_app_cons thm
+R4004:4012 Coq.Lists.List <> app_assoc thm
+R4004:4012 Coq.Lists.List <> app_assoc thm
+R4004:4012 Coq.Lists.List <> app_assoc thm
+prf 4047:4074 SetMonadExamples4 functional_correctness_merge
+binder 4086:4087 <> l1:44
+binder 4089:4090 <> l2:45
+R4104:4111 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4097:4100 PL.Monad2 SetMonadExamples4 incr def
+R4102:4103 PL.Monad2 <> l1:44 var
+R4119:4126 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4112:4115 PL.Monad2 SetMonadExamples4 incr def
+R4117:4118 PL.Monad2 <> l2:45 var
+R4127:4131 PL.Monad SetMonadHoare Hoare def
+binder 4162:4163 <> l3:46
+R4193:4196 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R4168:4178 Coq.Sorting.Permutation <> Permutation ind
+R4191:4192 PL.Monad2 <> l3:46 var
+R4183:4186 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R4181:4182 PL.Monad2 <> l1:44 var
+R4187:4188 PL.Monad2 <> l2:45 var
+R4197:4200 PL.Monad2 SetMonadExamples4 incr def
+R4202:4203 PL.Monad2 <> l3:46 var
+R4134:4138 PL.Monad2 SetMonadExamples4 merge def
+R4140:4141 PL.Monad2 <> l1:44 var
+R4143:4144 PL.Monad2 <> l2:45 var
+R4232:4245 PL.Monad SetMonadHoare Hoare_conjunct thm
+R4232:4245 PL.Monad SetMonadHoare Hoare_conjunct thm
+R4258:4267 PL.Monad2 SetMonadExamples4 merge_perm thm
+R4258:4267 PL.Monad2 SetMonadExamples4 merge_perm thm
+R4280:4289 PL.Monad2 SetMonadExamples4 merge_incr thm
+R4280:4289 PL.Monad2 SetMonadExamples4 merge_incr thm
+def 4363:4370 SetMonadExamples4 ext_sort
+R4376:4379 Coq.Init.Datatypes <> list ind
+R4381:4381 Coq.Numbers.BinNums <> Z ind
+binder 4373:4373 <> l:47
+R4385:4394 PL.Monad SetMonad M def
+R4397:4400 Coq.Init.Datatypes <> list ind
+R4402:4402 Coq.Numbers.BinNums <> Z ind
+binder 4414:4415 <> l':48
+R4436:4439 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R4420:4430 Coq.Sorting.Permutation <> Permutation ind
+R4434:4435 PL.Monad2 <> l':48 var
+R4432:4432 PL.Monad2 <> l:47 var
+R4440:4443 PL.Monad2 SetMonadExamples4 incr def
+R4445:4446 PL.Monad2 <> l':48 var
+def 4461:4469 SetMonadExamples4 ext_split
+R4475:4478 Coq.Init.Datatypes <> list ind
+R4480:4480 Coq.Numbers.BinNums <> Z ind
+binder 4472:4472 <> l:49
+R4484:4493 PL.Monad SetMonad M def
+R4502:4504 Coq.Init.Datatypes <> ::type_scope:x_'*'_x not
+R4496:4499 Coq.Init.Datatypes <> list ind
+R4501:4501 Coq.Numbers.BinNums <> Z ind
+R4505:4508 Coq.Init.Datatypes <> list ind
+R4510:4510 Coq.Numbers.BinNums <> Z ind
+R4523:4523 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R4526:4527 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R4530:4530 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+binder 4528:4529 <> l1:50
+binder 4524:4525 <> l0:51
+binder 4523:4530 <> pat:52
+R4535:4545 Coq.Sorting.Permutation <> Permutation ind
+R4552:4555 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R4550:4551 PL.Monad2 <> l0:51 var
+R4556:4557 PL.Monad2 <> l1:50 var
+R4547:4547 PL.Monad2 <> l:49 var
+def 4573:4584 SetMonadExamples4 gmergesort_f
+R4596:4599 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4590:4593 Coq.Init.Datatypes <> list ind
+R4595:4595 Coq.Numbers.BinNums <> Z ind
+R4600:4609 PL.Monad SetMonad M def
+R4612:4615 Coq.Init.Datatypes <> list ind
+R4617:4617 Coq.Numbers.BinNums <> Z ind
+binder 4587:4587 <> W:53
+R4630:4633 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R4624:4627 Coq.Init.Datatypes <> list ind
+R4629:4629 Coq.Numbers.BinNums <> Z ind
+R4634:4643 PL.Monad SetMonad M def
+R4646:4649 Coq.Init.Datatypes <> list ind
+R4651:4651 Coq.Numbers.BinNums <> Z ind
+binder 4663:4663 <> x:54
+R4673:4678 PL.Monad SetMonadOperator0 choice def
+R4730:4739 PL.Monad MonadNotation ::monad_scope:x_';;'_x not
+R4706:4709 PL.Monad SetMonadOperator0 test def
+R4720:4723 Coq.Init.Peano <> ::nat_scope:x_'>='_x not
+R4712:4717 Coq.Init.Datatypes <> length def
+R4719:4719 PL.Monad2 <> x:54 var
+R4740:4740 PL.Monad MonadNotation ::monad_scope:''''_x_'<-'_x_';;'_x not
+R4749:4752 PL.Monad MonadNotation ::monad_scope:''''_x_'<-'_x_';;'_x not
+R4764:4775 PL.Monad MonadNotation ::monad_scope:''''_x_'<-'_x_';;'_x not
+R4753:4761 PL.Monad2 SetMonadExamples4 ext_split def
+R4763:4763 PL.Monad2 <> x:54 var
+R4741:4741 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R4744:4745 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R4748:4748 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+binder 4746:4747 <> q1:55
+binder 4742:4743 <> p1:56
+binder 4741:4748 <> pat:57
+R4778:4781 PL.Monad MonadNotation ::monad_scope:x_'<-'_x_';;'_x not
+R4788:4799 PL.Monad MonadNotation ::monad_scope:x_'<-'_x_';;'_x not
+R4782:4782 PL.Monad2 <> W:53 var
+R4785:4786 PL.Monad2 <> p1:56 var
+binder 4776:4777 <> p2:58
+R4802:4805 PL.Monad MonadNotation ::monad_scope:x_'<-'_x_';;'_x not
+R4812:4823 PL.Monad MonadNotation ::monad_scope:x_'<-'_x_';;'_x not
+R4806:4806 PL.Monad2 <> W:53 var
+R4809:4810 PL.Monad2 <> q1:55 var
+binder 4800:4801 <> q2:59
+R4824:4828 PL.Monad2 SetMonadExamples4 merge def
+R4830:4831 PL.Monad2 <> p2:58 var
+R4833:4834 PL.Monad2 <> q2:59 var
+R4687:4694 PL.Monad2 SetMonadExamples4 ext_sort def
+R4696:4696 PL.Monad2 <> x:54 var
+def 4850:4859 SetMonadExamples4 gmergesort
+R4864:4874 PL.FixedPoint KleeneFix Kleene_LFix def
+R4876:4887 PL.Monad2 SetMonadExamples4 gmergesort_f def
+prf 4896:4908 SetMonadExamples4 ext_sort_fact
+binder 4920:4920 <> l:60
+R4927:4931 PL.Monad SetMonadHoare Hoare def
+binder 4951:4952 <> l0:61
+R4973:4976 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R4957:4967 Coq.Sorting.Permutation <> Permutation ind
+R4971:4972 PL.Monad2 <> l0:61 var
+R4969:4969 PL.Monad2 <> l:60 var
+R4977:4980 PL.Monad2 SetMonadExamples4 incr def
+R4982:4983 PL.Monad2 <> l0:61 var
+R4934:4941 PL.Monad2 SetMonadExamples4 ext_sort def
+R4943:4943 PL.Monad2 <> l:60 var
+R5003:5007 PL.Monad SetMonadHoare Hoare def
+R5010:5017 PL.Monad2 SetMonadExamples4 ext_sort def
+prf 5064:5077 SetMonadExamples4 ext_split_fact
+binder 5089:5089 <> l:62
+R5096:5100 PL.Monad SetMonadHoare Hoare def
+R5122:5122 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R5125:5126 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R5129:5129 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+binder 5127:5128 <> l2:63
+binder 5123:5124 <> l1:64
+binder 5122:5129 <> pat:65
+R5134:5144 Coq.Sorting.Permutation <> Permutation ind
+R5151:5154 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R5149:5150 PL.Monad2 <> l1:64 var
+R5155:5156 PL.Monad2 <> l2:63 var
+R5146:5146 PL.Monad2 <> l:62 var
+R5103:5111 PL.Monad2 SetMonadExamples4 ext_split def
+R5113:5113 PL.Monad2 <> l:62 var
+R5177:5181 PL.Monad SetMonadHoare Hoare def
+R5184:5192 PL.Monad2 SetMonadExamples4 ext_split def
+prf 5241:5272 SetMonadExamples4 functional_correctness_mergesort
+binder 5284:5284 <> l:66
+R5291:5295 PL.Monad SetMonadHoare Hoare def
+binder 5317:5318 <> l0:67
+R5339:5342 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R5323:5333 Coq.Sorting.Permutation <> Permutation ind
+R5337:5338 PL.Monad2 <> l0:67 var
+R5335:5335 PL.Monad2 <> l:66 var
+R5343:5346 PL.Monad2 SetMonadExamples4 incr def
+R5348:5349 PL.Monad2 <> l0:67 var
+R5298:5307 PL.Monad2 SetMonadExamples4 gmergesort def
+R5309:5309 PL.Monad2 <> l:66 var
+R5379:5383 PL.Monad SetMonadHoare Hoare def
+R5386:5395 PL.Monad2 SetMonadExamples4 gmergesort def
+R5398:5408 PL.FixedPoint KleeneFix Kleene_LFix def
+binder 5494:5494 <> l:68
+R5507:5511 PL.Monad SetMonadHoare Hoare def
+binder 5566:5567 <> l0:69
+R5588:5591 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R5572:5582 Coq.Sorting.Permutation <> Permutation ind
+R5586:5587 PL.Monad2 <> l0:69 var
+R5584:5584 PL.Monad2 <> l:68 var
+R5592:5595 PL.Monad2 SetMonadExamples4 incr def
+R5597:5598 PL.Monad2 <> l0:69 var
+R5514:5521 Coq.Arith.PeanoNat Nat iter def
+R5542:5542 PL.Monad2 <> l:68 var
+R5538:5540 SetsClass.SetsClass_AxiomFree SetsNotation ::sets_scope:'∅' not
+R5525:5536 PL.Monad2 SetMonadExamples4 gmergesort_f def
+binder 5494:5494 <> l:70
+R5507:5511 PL.Monad SetMonadHoare Hoare def
+binder 5566:5567 <> l0:71
+R5588:5591 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R5572:5582 Coq.Sorting.Permutation <> Permutation ind
+R5586:5587 PL.Monad2 <> l0:71 var
+R5584:5584 PL.Monad2 <> l:70 var
+R5592:5595 PL.Monad2 SetMonadExamples4 incr def
+R5597:5598 PL.Monad2 <> l0:71 var
+R5514:5521 Coq.Arith.PeanoNat Nat iter def
+R5542:5542 PL.Monad2 <> l:70 var
+R5538:5540 SetsClass.SetsClass_AxiomFree SetsNotation ::sets_scope:'∅' not
+R5525:5536 PL.Monad2 SetMonadExamples4 gmergesort_f def
+R5644:5648 PL.Monad SetMonadHoare Hoare def
+R5690:5701 PL.Monad2 SetMonadExamples4 gmergesort_f def
+R5719:5730 PL.Monad SetMonadHoare Hoare_choice thm
+R5740:5752 PL.Monad2 SetMonadExamples4 ext_sort_fact thm
+R5719:5730 PL.Monad SetMonadHoare Hoare_choice thm
+R5740:5752 PL.Monad2 SetMonadExamples4 ext_sort_fact thm
+R5768:5782 PL.Monad SetMonadHoare Hoare_test_bind thm
+R5768:5782 PL.Monad SetMonadHoare Hoare_test_bind thm
+R5808:5817 PL.Monad SetMonadHoare Hoare_bind thm
+R5827:5840 PL.Monad2 SetMonadExamples4 ext_split_fact thm
+R5808:5817 PL.Monad SetMonadHoare Hoare_bind thm
+R5827:5840 PL.Monad2 SetMonadExamples4 ext_split_fact thm
+R5879:5888 PL.Monad SetMonadHoare Hoare_bind thm
+R5879:5888 PL.Monad SetMonadHoare Hoare_bind thm
+R5939:5948 PL.Monad SetMonadHoare Hoare_bind thm
+R5939:5948 PL.Monad SetMonadHoare Hoare_bind thm
+R5999:6010 PL.Monad SetMonadHoare Hoare_conseq thm
+R6022:6049 PL.Monad2 SetMonadExamples4 functional_correctness_merge thm
+R5999:6010 PL.Monad SetMonadHoare Hoare_conseq thm
+R6022:6049 PL.Monad2 SetMonadExamples4 functional_correctness_merge thm
+R6152:6168 PL.Monad2 SetMonadExamples4 <> mod
+mod 6179:6195 <> SetMonadOperator2
+R6205:6217 PL.Monad SetMonadHoare <> mod
+R6226:6242 PL.Monad SetMonadOperator0 <> mod
+R6251:6267 PL.Monad SetMonadOperator1 <> mod
+R6276:6294 PL.Monad SetMonadProperties0 <> mod
+R6303:6315 PL.Monad SetMonadHoare <> mod
+R6329:6332 PL.Monad Monad bind meth
+R6358:6360 PL.Monad Monad ret meth
+def 6386:6394 SetMonadOperator2 list_iter
+binder 6408:6408 <> A:72
+binder 6410:6410 <> B:73
+R6435:6438 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6434:6434 PL.Monad2 <> A:72 var
+R6440:6443 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6439:6439 PL.Monad2 <> B:73 var
+R6444:6453 PL.Monad SetMonad M def
+R6455:6455 PL.Monad2 <> B:73 var
+binder 6431:6431 <> f:74
+R6473:6476 Coq.Init.Datatypes <> list ind
+R6478:6478 PL.Monad2 <> A:72 var
+binder 6470:6470 <> l:75
+R6496:6496 PL.Monad2 <> B:73 var
+binder 6493:6493 <> b:76
+R6502:6511 PL.Monad SetMonad M def
+R6513:6513 PL.Monad2 <> B:73 var
+R6526:6526 PL.Monad2 <> l:75 var
+R6537:6539 Coq.Init.Datatypes <> nil constr
+R6544:6546 PL.Monad Monad ret meth
+R6548:6548 PL.Monad2 <> b:76 var
+R6555:6558 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6567:6570 PL.Monad MonadNotation ::monad_scope:x_'<-'_x_';;'_x not
+R6576:6578 PL.Monad MonadNotation ::monad_scope:x_'<-'_x_';;'_x not
+R6571:6571 PL.Monad2 <> f:74 var
+R6575:6575 PL.Monad2 <> b:76 var
+binder 6565:6566 <> b0:79
+R6579:6587 PL.Monad2 <> list_iter:77 def
+R6594:6595 PL.Monad2 <> b0:79 var
+R6589:6589 PL.Monad2 <> f:74 var
+prf 6613:6627 SetMonadOperator2 Hoare_list_iter
+binder 6630:6630 <> A:80
+binder 6632:6632 <> B:81
+R6656:6659 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6655:6655 PL.Monad2 <> A:80 var
+R6661:6664 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6660:6660 PL.Monad2 <> B:81 var
+R6665:6674 PL.Monad SetMonad M def
+R6676:6676 PL.Monad2 <> B:81 var
+binder 6652:6652 <> f:82
+R6698:6701 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6692:6695 Coq.Init.Datatypes <> list ind
+R6697:6697 PL.Monad2 <> A:80 var
+R6703:6706 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6702:6702 PL.Monad2 <> B:81 var
+binder 6689:6689 <> P:83
+R6718:6718 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6802:6811 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6877:6877 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 6726:6726 <> b:84
+binder 6728:6728 <> l:85
+binder 6730:6730 <> a:86
+R6745:6755 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6740:6740 PL.Monad2 <> P:83 var
+R6744:6744 PL.Monad2 <> b:84 var
+R6742:6742 PL.Monad2 <> l:85 var
+R6756:6760 PL.Monad SetMonadHoare Hoare def
+binder 6775:6776 <> b0:87
+R6781:6781 PL.Monad2 <> P:83 var
+R6799:6800 PL.Monad2 <> b0:87 var
+R6785:6788 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R6784:6784 PL.Monad2 <> l:85 var
+R6790:6793 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6789:6789 PL.Monad2 <> a:86 var
+R6794:6796 Coq.Init.Datatypes <> nil constr
+R6763:6763 PL.Monad2 <> f:82 var
+R6767:6767 PL.Monad2 <> b:84 var
+R6765:6765 PL.Monad2 <> a:86 var
+binder 6819:6819 <> b:88
+binder 6821:6821 <> l:89
+R6831:6834 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R6824:6824 PL.Monad2 <> P:83 var
+R6830:6830 PL.Monad2 <> b:88 var
+R6826:6828 Coq.Init.Datatypes <> nil constr
+R6835:6839 PL.Monad SetMonadHoare Hoare def
+binder 6864:6865 <> b0:90
+R6870:6870 PL.Monad2 <> P:83 var
+R6874:6875 PL.Monad2 <> b0:90 var
+R6872:6872 PL.Monad2 <> l:89 var
+R6842:6850 PL.Monad2 SetMonadOperator2 list_iter def
+R6856:6856 PL.Monad2 <> b:88 var
+R6854:6854 PL.Monad2 <> l:89 var
+R6852:6852 PL.Monad2 <> f:82 var
+R6981:6987 Coq.Lists.List <> rev_ind thm
+R6981:6987 Coq.Lists.List <> rev_ind thm
+R7016:7024 PL.Monad SetMonadHoare Hoare_ret thm
+R7016:7024 PL.Monad SetMonadHoare Hoare_ret thm
+prf 7271:7283 SetMonadOperator2 list_iter_app
+binder 7296:7296 <> A:91
+binder 7298:7298 <> B:92
+R7321:7324 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7320:7320 PL.Monad2 <> A:91 var
+R7326:7329 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7325:7325 PL.Monad2 <> B:92 var
+R7330:7339 PL.Monad SetMonad M def
+R7341:7341 PL.Monad2 <> B:92 var
+binder 7317:7317 <> f:93
+R7361:7364 Coq.Init.Datatypes <> list ind
+R7366:7366 PL.Monad2 <> A:91 var
+binder 7354:7355 <> l1:94
+binder 7357:7358 <> l2:95
+R7382:7382 PL.Monad2 <> B:92 var
+binder 7379:7379 <> b:96
+R7432:7439 SetsClass.SetsClass_AxiomFree SetsNotation ::sets_scope:x_'=='_x not
+R7392:7395 PL.Monad MonadNotation ::monad_scope:x_'<-'_x_';;'_x not
+R7412:7414 PL.Monad MonadNotation ::monad_scope:x_'<-'_x_';;'_x not
+R7396:7404 PL.Monad2 SetMonadOperator2 list_iter def
+R7411:7411 PL.Monad2 <> b:96 var
+R7408:7409 PL.Monad2 <> l1:94 var
+R7406:7406 PL.Monad2 <> f:93 var
+binder 7390:7391 <> b0:97
+R7415:7423 PL.Monad2 SetMonadOperator2 list_iter def
+R7430:7431 PL.Monad2 <> b0:97 var
+R7427:7428 PL.Monad2 <> l2:95 var
+R7425:7425 PL.Monad2 <> f:93 var
+R7440:7448 PL.Monad2 SetMonadOperator2 list_iter def
+R7463:7463 PL.Monad2 <> b:96 var
+R7455:7458 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R7453:7454 PL.Monad2 <> l1:94 var
+R7459:7460 PL.Monad2 <> l2:95 var
+R7450:7450 PL.Monad2 <> f:93 var
+inst 7625:7635 SetMonadOperator2 Hoare_congr
+binder 7638:7638 <> A:98
+R7650:7655 Coq.Classes.Morphisms <> Proper class
+R7687:7691 PL.Monad SetMonadHoare Hoare def
+R7693:7693 PL.Monad2 <> A:98 var
+R7668:7672 Coq.Classes.Morphisms ProperNotations ::signature_scope:x_'==>'_x not
+R7658:7667 SetsClass.SetsDomain Sets equiv meth
+R7675:7679 Coq.Classes.Morphisms ProperNotations ::signature_scope:x_'==>'_x not
+R7673:7674 Coq.Init.Logic <> eq ind
+R7680:7682 Coq.Init.Logic <> iff def
+prf 7845:7859 SetMonadOperator2 Hoare_list_iter
+binder 7862:7862 <> A:99
+binder 7864:7864 <> B:100
+R7888:7891 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7887:7887 PL.Monad2 <> A:99 var
+R7893:7896 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7892:7892 PL.Monad2 <> B:100 var
+R7897:7906 PL.Monad SetMonad M def
+R7908:7908 PL.Monad2 <> B:100 var
+binder 7884:7884 <> f:101
+R7930:7933 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7924:7927 Coq.Init.Datatypes <> list ind
+R7929:7929 PL.Monad2 <> A:99 var
+R7935:7938 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7934:7934 PL.Monad2 <> B:100 var
+binder 7921:7921 <> P:102
+R7950:7950 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8034:8043 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8109:8109 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+binder 7958:7958 <> b:103
+binder 7960:7960 <> l:104
+binder 7962:7962 <> a:105
+R7977:7987 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R7972:7972 PL.Monad2 <> P:102 var
+R7976:7976 PL.Monad2 <> b:103 var
+R7974:7974 PL.Monad2 <> l:104 var
+R7988:7992 PL.Monad SetMonadHoare Hoare def
+binder 8007:8008 <> b0:106
+R8013:8013 PL.Monad2 <> P:102 var
+R8031:8032 PL.Monad2 <> b0:106 var
+R8017:8020 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R8016:8016 PL.Monad2 <> l:104 var
+R8022:8025 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R8021:8021 PL.Monad2 <> a:105 var
+R8026:8028 Coq.Init.Datatypes <> nil constr
+R7995:7995 PL.Monad2 <> f:101 var
+R7999:7999 PL.Monad2 <> b:103 var
+R7997:7997 PL.Monad2 <> a:105 var
+binder 8051:8051 <> b:107
+binder 8053:8053 <> l:108
+R8063:8066 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R8056:8056 PL.Monad2 <> P:102 var
+R8062:8062 PL.Monad2 <> b:107 var
+R8058:8060 Coq.Init.Datatypes <> nil constr
+R8067:8071 PL.Monad SetMonadHoare Hoare def
+binder 8096:8097 <> b0:109
+R8102:8102 PL.Monad2 <> P:102 var
+R8106:8107 PL.Monad2 <> b0:109 var
+R8104:8104 PL.Monad2 <> l:108 var
+R8074:8082 PL.Monad2 SetMonadOperator2 list_iter def
+R8088:8088 PL.Monad2 <> b:107 var
+R8086:8086 PL.Monad2 <> l:108 var
+R8084:8084 PL.Monad2 <> f:101 var
+R8210:8226 PL.Monad2 SetMonadExamples4 <> mod
+def 8242:8250 SetMonadOperator2 insertion
+R8256:8256 Coq.Numbers.BinNums <> Z ind
+binder 8253:8253 <> x:110
+R8263:8266 Coq.Init.Datatypes <> list ind
+R8268:8268 Coq.Numbers.BinNums <> Z ind
+binder 8260:8260 <> l:111
+R8272:8281 PL.Monad SetMonad M def
+R8284:8287 Coq.Init.Datatypes <> list ind
+R8289:8289 Coq.Numbers.BinNums <> Z ind
+binder 8301:8302 <> l':112
+R8307:8313 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R8319:8324 Coq.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 8314:8315 <> l1:113
+binder 8317:8318 <> l2:114
+R8337:8340 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R8326:8328 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R8325:8325 PL.Monad2 <> l:111 var
+R8331:8334 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R8329:8330 PL.Monad2 <> l1:113 var
+R8335:8336 PL.Monad2 <> l2:114 var
+R8359:8362 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R8343:8345 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R8341:8342 PL.Monad2 <> l':112 var
+R8348:8351 Coq.Init.Datatypes <> ::list_scope:x_'++'_x not
+R8346:8347 PL.Monad2 <> l1:113 var
+R8353:8356 Coq.Init.Datatypes <> ::list_scope:x_'::'_x not
+R8352:8352 PL.Monad2 <> x:110 var
+R8357:8358 PL.Monad2 <> l2:114 var
+R8363:8366 PL.Monad2 SetMonadExamples4 incr def
+R8368:8369 PL.Monad2 <> l':112 var
+def 8384:8391 SetMonadOperator2 ins_sort
+R8397:8400 Coq.Init.Datatypes <> list ind
+R8402:8402 Coq.Numbers.BinNums <> Z ind
+binder 8394:8394 <> l:115
+R8410:8418 PL.Monad2 SetMonadOperator2 list_iter def
+R8432:8434 Coq.Init.Datatypes <> nil constr
+R8430:8430 PL.Monad2 <> l:115 var
+R8420:8428 PL.Monad2 SetMonadOperator2 insertion def
+prf 8495:8507 SetMonadOperator2 ins_sort_perm
+binder 8519:8519 <> L:116
+R8526:8530 PL.Monad SetMonadHoare Hoare def
+binder 8562:8562 <> l:117
+R8567:8577 Coq.Sorting.Permutation <> Permutation ind
+R8581:8581 PL.Monad2 <> l:117 var
+R8579:8579 PL.Monad2 <> L:116 var
+R8539:8546 PL.Monad2 SetMonadOperator2 ins_sort def
+R8548:8548 PL.Monad2 <> L:116 var
+R8607:8621 PL.Monad2 SetMonadOperator2 Hoare_list_iter prfax
+R8607:8621 PL.Monad2 SetMonadOperator2 Hoare_list_iter prfax
+R8647:8651 PL.Monad SetMonadHoare Hoare def
+R8654:8662 PL.Monad2 SetMonadOperator2 insertion def
+R8809:8828 Coq.Sorting.Permutation <> Permutation_app_comm thm
+R8809:8828 Coq.Sorting.Permutation <> Permutation_app_comm thm
+R8809:8828 Coq.Sorting.Permutation <> Permutation_app_comm thm
+R8854:8873 Coq.Sorting.Permutation <> Permutation_app_comm thm
+R8854:8873 Coq.Sorting.Permutation <> Permutation_app_comm thm
+R8854:8873 Coq.Sorting.Permutation <> Permutation_app_comm thm
+R8886:8905 Coq.Sorting.Permutation <> Permutation_cons_app thm
+R8886:8905 Coq.Sorting.Permutation <> Permutation_cons_app thm
+R8920:8939 Coq.Sorting.Permutation <> Permutation_app_comm thm
+R8920:8939 Coq.Sorting.Permutation <> Permutation_app_comm thm
+R8920:8939 Coq.Sorting.Permutation <> Permutation_app_comm thm
+prf 9039:9051 SetMonadOperator2 ins_sort_incr
+binder 9063:9063 <> L:118
+R9070:9074 PL.Monad SetMonadHoare Hoare def
+binder 9106:9106 <> l:119
+R9111:9114 PL.Monad2 SetMonadExamples4 incr def
+R9116:9116 PL.Monad2 <> l:119 var
+R9083:9090 PL.Monad2 SetMonadOperator2 ins_sort def
+R9092:9092 PL.Monad2 <> L:118 var
+prf 9219:9249 SetMonadOperator2 functional_correctness_ins_sort
+binder 9261:9261 <> L:120
+R9268:9272 PL.Monad SetMonadHoare Hoare def
+binder 9304:9304 <> l:121
+R9324:9327 Coq.Init.Logic <> ::type_scope:x_'/\'_x not
+R9309:9319 Coq.Sorting.Permutation <> Permutation ind
+R9323:9323 PL.Monad2 <> l:121 var
+R9321:9321 PL.Monad2 <> L:120 var
+R9328:9331 PL.Monad2 SetMonadExamples4 incr def
+R9333:9333 PL.Monad2 <> l:121 var
+R9281:9288 PL.Monad2 SetMonadOperator2 ins_sort def
+R9290:9290 PL.Monad2 <> L:120 var
+R9362:9375 PL.Monad SetMonadHoare Hoare_conjunct thm
+R9362:9375 PL.Monad SetMonadHoare Hoare_conjunct thm
+R9388:9400 PL.Monad2 SetMonadOperator2 ins_sort_perm thm
+R9388:9400 PL.Monad2 SetMonadOperator2 ins_sort_perm thm
+R9413:9425 PL.Monad2 SetMonadOperator2 ins_sort_incr prfax
+R9413:9425 PL.Monad2 SetMonadOperator2 ins_sort_incr prfax
+R9438:9454 PL.Monad2 SetMonadOperator2 <> mod

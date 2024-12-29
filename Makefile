@@ -8,8 +8,8 @@ COQBIN=
 
 -include CONFIGURE
 
-COQC=$(COQBIN)coqc$(SUF)
-COQDEP=$(COQBIN)coqdep$(SUF)
+COQC=$(COQBIN)coqc.exe$(SUF)
+COQDEP=$(COQBIN)coqdep.exe$(SUF)
 
 PL_FLAG = -R $(PL_DIR) PL -R $(SETS_DIR) SetsClass -R $(COMPCERT_DIR) compcert.lib
 
