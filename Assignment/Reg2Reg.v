@@ -137,7 +137,6 @@ injection H.
 tauto.
 Qed.
 
-
 (* Translate I.reg_exp to O.reg_exp *)
 Fixpoint trans {T:Type} (r: I.reg_exp T): trans_result T :=
     match r with
@@ -558,158 +557,25 @@ Lemma trans_Char_correct:
     forall {T : Type} (r1 : I.reg_exp T) (t : T -> Prop),
         r1 = I.Char_r t -> trans_correct_p r1.
 Proof.
-intros.
-unfold trans_correct_p. 
-intros. unfold trans in H0.
-rewrite H in H0. 
-apply trans_result_inj in H0.
-rewrite H0. rewrite H. unfold I.exp_match, O.exp_match.
-reflexivity.
-Qed.
-
-Lemma set_prod_left_nil:
-    forall {T:Type} (s : list T -> Prop),
-        O.set_prod [nil] s == s.
-Proof.
-    unfold O.set_prod.
-    intros.
-    Sets_unfold.
-    intros.
-    split.
-    + intros.
-      repeat destruct H.
-      destruct H0.
-      rewrite app_nil_l in H0.
-      rewrite H0; exact H.
-    + intros.
-      exists nil, a.
-      repeat split; try tauto; try reflexivity.
-Qed.
-
-(* set_prod s [nil] == s*)
-Lemma set_prod_right_nil:
-    forall {T:Type} (s : list T -> Prop),
-        O.set_prod s [nil] == s.
-Proof.
-    unfold O.set_prod.
-    intros.
-    Sets_unfold.
-    intros.
-    split.
-    + intros.
-      repeat destruct H.
-      destruct H0.
-      destruct H0.
-      rewrite app_nil_r in H1.
-      rewrite H1; exact H.
-    + intros.
-      exists a, nil.
-      repeat split; try tauto; try reflexivity.
-      rewrite app_nil_r; reflexivity.
-Qed.
-
-
+Admitted.
 
 Lemma trans_Concat_correct:
     forall {T : Type} (r r1 r2: I.reg_exp T),
         r = I.Concat_r r1 r2 -> trans_correct_p r1 -> trans_correct_p r2 -> trans_correct_p r.
 Proof.
-unfold trans_correct_p.
-intros. remember (trans r1) as res1. remember (trans r2) as res2. destruct res1, res2.
-+ rewrite H in H2. rewrite H.  simpl in H2. 
-  rewrite <- Heqres1 in H2. rewrite <- Heqres2 in H2. discriminate.
-+ rewrite H in H2. rewrite H.  simpl in H2. 
-  rewrite <- Heqres1 in H2. rewrite <- Heqres2 in H2. discriminate.
-+ rewrite H in H2. rewrite H.  simpl in H2. 
-  rewrite <- Heqres1 in H2. rewrite <- Heqres2 in H2. discriminate.
-+ rewrite H in H2. rewrite H.  simpl in H2. 
-  rewrite <- Heqres1 in H2. rewrite <- Heqres2 in H2.
-  apply trans_result_inj in H2. rewrite H2. simpl. 
-  pose proof H0 r3 eq_refl. pose proof H1 r4 eq_refl.
-  apply set_prod_equiv. ++ tauto. ++ tauto.
-  Qed.
-  
-
-
-
-  (* simpl. assert (HE : r1=I.EmptySet_r). 
-  ++ destruct r1 ; try discriminate. 
-  ++ rewrite HE. simpl. assert (HE2 : r2=I.EmptySet_r). 
-  +++ destruct r2  ; try discriminate.  
-  +++ rewrite HE2. simpl. assert (HE3 : r0=O.EmptyStr_r).
-  ++++ destruct r0 ; try discriminate.
-  ++++ rewrite HE3. simpl. discriminate.  *)
+Admitted.
 
 Lemma trans_Union_correct:
     forall {T : Type} (r r1 r2 : I.reg_exp T),
         r = I.Union_r r1 r2 -> trans_correct_p r1 -> trans_correct_p r2 -> trans_correct_p r.
 Proof.
-unfold trans_correct_p.
-intros. remember (trans r1) as res1. remember (trans r2) as res2. destruct res1, res2.
-+ rewrite H in H2. rewrite H.  simpl in H2. 
-  rewrite <- Heqres1 in H2. rewrite <- Heqres2 in H2. discriminate.
-
-  + rewrite H in H2. rewrite H.  simpl in H2. 
-  rewrite <- Heqres1 in H2. rewrite <- Heqres2 in H2. 
-  apply trans_result_inj in H2. rewrite H2. simpl. 
-  simpl.   pose proof H1 r3 eq_refl.  rewrite H3. simpl. pose proof (trans_empty r1).
-  rewrite Heqres1 in H4. pose proof H4 eq_refl. rewrite H5. apply Sets_union_empty_l.
-
-  + rewrite H in H2. rewrite H.  simpl in H2. 
-  rewrite <- Heqres1 in H2. rewrite <- Heqres2 in H2. 
-  apply trans_result_inj in H2. rewrite H2. simpl. 
-  simpl.   pose proof H0 r3 eq_refl.  rewrite H3. simpl. pose proof (trans_empty r2).
-  rewrite Heqres2 in H4. pose proof H4 eq_refl. rewrite H5. apply Sets_union_empty_r.
-
-  + rewrite H in H2. rewrite H.  simpl in H2. 
-  rewrite <- Heqres1 in H2. rewrite <- Heqres2 in H2.
-  apply trans_result_inj in H2. rewrite H2. simpl. 
-  pose proof H0 r3 eq_refl. pose proof H1 r4 eq_refl.
-  rewrite H3 , H4. reflexivity.
-  Qed.
-  
-
-
-Lemma eq_use:
-forall {T:Type} (a0 : list T) (a : T) (s : list T),
-a0 ∈ eq (s) -> a0 = s.
-Proof.
-intros.
-rewrite H.
-reflexivity.
-Qed. 
-
+Admitted.
 
 Lemma trans_String_correct:
     forall {T : Type} (r : I.reg_exp T) (s : list T),
         r = I.String_r s -> trans_correct_p r.
-        Proof.
-        unfold trans_correct_p. intros.
-        unfold trans in H0.
-        rewrite H in H0.
-        apply trans_result_inj in H0.
-        rewrite H0.
-        rewrite H.
-        revert r r2 H H0.
-        induction s.
-        + unfold string2reg. unfold  O.exp_match , I.exp_match. reflexivity.
-        + pose proof IHs (I.String_r s) (string2reg s) eq_refl eq_refl.
-          intros. simpl. unfold O.set_prod. Sets_unfold. split.
-          -intros. exists (cons a nil). exists s.
-          repeat split.
-          ++ exists a. split.
-          +++ reflexivity.
-          +++ reflexivity.
-          ++ rewrite <- H. unfold I.exp_match. Sets_unfold. reflexivity.
-          ++ apply eq_use. ++++ tauto. ++++ apply H2.
-          - intros. repeat destruct H2. rewrite <- H in H3 . 
-          unfold I.exp_match in H3. destruct H3. Sets_unfold in H2.
-          apply eq_use in H2. rewrite H2 in H3. rewrite H3. rewrite H4. 
-                +++ reflexivity. +++ tauto.
-Qed.
-
-        
-
+Proof.
+Admitted.
 
 Lemma Star_indexed_included:
     forall {T} (n : nat) (s : list T -> Prop),
