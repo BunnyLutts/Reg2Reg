@@ -567,49 +567,6 @@ rewrite H0. rewrite H. unfold I.exp_match, O.exp_match.
 reflexivity.
 Qed.
 
-Lemma set_prod_left_nil:
-    forall {T:Type} (s : list T -> Prop),
-        O.set_prod [nil] s == s.
-Proof.
-    unfold O.set_prod.
-    intros.
-    Sets_unfold.
-    intros.
-    split.
-    + intros.
-      repeat destruct H.
-      destruct H0.
-      rewrite app_nil_l in H0.
-      rewrite H0; exact H.
-    + intros.
-      exists nil, a.
-      repeat split; try tauto; try reflexivity.
-Qed.
-
-(* set_prod s [nil] == s*)
-Lemma set_prod_right_nil:
-    forall {T:Type} (s : list T -> Prop),
-        O.set_prod s [nil] == s.
-Proof.
-    unfold O.set_prod.
-    intros.
-    Sets_unfold.
-    intros.
-    split.
-    + intros.
-      repeat destruct H.
-      destruct H0.
-      destruct H0.
-      rewrite app_nil_r in H1.
-      rewrite H1; exact H.
-    + intros.
-      exists a, nil.
-      repeat split; try tauto; try reflexivity.
-      rewrite app_nil_r; reflexivity.
-Qed.
-
-
-
 Lemma trans_Concat_correct:
     forall {T : Type} (r r1 r2: I.reg_exp T),
         r = I.Concat_r r1 r2 -> trans_correct_p r1 -> trans_correct_p r2 -> trans_correct_p r.
@@ -628,17 +585,6 @@ intros. remember (trans r1) as res1. remember (trans r2) as res2. destruct res1,
   pose proof H0 r3 eq_refl. pose proof H1 r4 eq_refl.
   apply set_prod_equiv. ++ tauto. ++ tauto.
   Qed.
-  
-
-
-
-  (* simpl. assert (HE : r1=I.EmptySet_r). 
-  ++ destruct r1 ; try discriminate. 
-  ++ rewrite HE. simpl. assert (HE2 : r2=I.EmptySet_r). 
-  +++ destruct r2  ; try discriminate.  
-  +++ rewrite HE2. simpl. assert (HE3 : r0=O.EmptyStr_r).
-  ++++ destruct r0 ; try discriminate.
-  ++++ rewrite HE3. simpl. discriminate.  *)
 
 Lemma trans_Union_correct:
     forall {T : Type} (r r1 r2 : I.reg_exp T),
@@ -667,8 +613,6 @@ intros. remember (trans r1) as res1. remember (trans r2) as res2. destruct res1,
   pose proof H0 r3 eq_refl. pose proof H1 r4 eq_refl.
   rewrite H3 , H4. reflexivity.
   Qed.
-  
-
 
 Lemma eq_use:
 forall {T:Type} (a0 : list T) (a : T) (s : list T),
@@ -678,7 +622,6 @@ intros.
 rewrite H.
 reflexivity.
 Qed. 
-
 
 Lemma trans_String_correct:
     forall {T : Type} (r : I.reg_exp T) (s : list T),
@@ -707,9 +650,6 @@ Lemma trans_String_correct:
           apply eq_use in H2. rewrite H2 in H3. rewrite H3. rewrite H4. 
                 +++ reflexivity. +++ tauto.
 Qed.
-
-        
-
 
 Lemma Star_indexed_included:
     forall {T} (n : nat) (s : list T -> Prop),
